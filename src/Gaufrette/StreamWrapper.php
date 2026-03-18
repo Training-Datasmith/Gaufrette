@@ -16,10 +16,8 @@ class StreamWrapper
 
     /**
      * Defines the filesystem map.
-     *
-     * @param FilesystemMap $map
      */
-    public static function setFilesystemMap(FilesystemMap $map)
+    public static function setFilesystemMap(FilesystemMap $map): void
     {
         self::$filesystemMap = $map;
     }
@@ -43,23 +41,20 @@ class StreamWrapper
      *
      * @param string $scheme Default is gaufrette
      */
-    public static function register($scheme = 'gaufrette')
+    public static function register($scheme = 'gaufrette'): void
     {
         self::streamWrapperUnregister($scheme);
 
-        if (!self::streamWrapperRegister($scheme, __CLASS__)) {
+        if (!self::streamWrapperRegister($scheme, self::class)) {
             throw new \RuntimeException(sprintf(
                 'Could not register stream wrapper class %s for scheme %s.',
-                __CLASS__,
+                self::class,
                 $scheme
             ));
         }
     }
 
-    /**
-     * @return FilesystemMap
-     */
-    protected static function createFilesystemMap()
+    protected static function createFilesystemMap(): \Gaufrette\FilesystemMap
     {
         return new FilesystemMap();
     }
@@ -77,10 +72,8 @@ class StreamWrapper
     /**
      * @param string $scheme    - protocol scheme
      * @param string $className
-     *
-     * @return bool
      */
-    protected static function streamWrapperRegister($scheme, $className)
+    protected static function streamWrapperRegister($scheme, $className): bool
     {
         return stream_wrapper_register($scheme, $className);
     }
@@ -120,7 +113,7 @@ class StreamWrapper
         return 0;
     }
 
-    public function stream_close()
+    public function stream_close(): void
     {
         if ($this->stream) {
             $this->stream->close();
@@ -274,7 +267,7 @@ class StreamWrapper
         return self::getFilesystemMap()->get($domain)->createStream($key);
     }
 
-    protected function createStreamMode($mode)
+    protected function createStreamMode($mode): \Gaufrette\StreamMode
     {
         return new StreamMode($mode);
     }

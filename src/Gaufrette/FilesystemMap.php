@@ -9,7 +9,7 @@ namespace Gaufrette;
  */
 class FilesystemMap implements FilesystemMapInterface
 {
-    private $filesystems = [];
+    private array $filesystems = [];
 
     /**
      * Returns an array of all the registered filesystems where the key is the
@@ -26,12 +26,11 @@ class FilesystemMap implements FilesystemMapInterface
      * Register the given filesystem for the specified name.
      *
      * @param string     $name
-     * @param FilesystemInterface $filesystem
      *
      * @throws \InvalidArgumentException when the specified name contains
      *                                  forbidden characters
      */
-    public function set($name, FilesystemInterface $filesystem)
+    public function set($name, FilesystemInterface $filesystem): void
     {
         if (!preg_match('/^[-_a-zA-Z0-9]+$/', $name)) {
             throw new \InvalidArgumentException(sprintf(
@@ -46,7 +45,7 @@ class FilesystemMap implements FilesystemMapInterface
     /**
      * {@inheritdoc}
      */
-    public function has($name)
+    public function has($name): bool
     {
         return isset($this->filesystems[$name]);
     }
@@ -71,7 +70,7 @@ class FilesystemMap implements FilesystemMapInterface
      *
      * @param string $name
      */
-    public function remove($name)
+    public function remove($name): void
     {
         if (!$this->has($name)) {
             throw new \InvalidArgumentException(sprintf(
@@ -86,7 +85,7 @@ class FilesystemMap implements FilesystemMapInterface
     /**
      * Clears all the registered filesystems.
      */
-    public function clear()
+    public function clear(): void
     {
         $this->filesystems = [];
     }

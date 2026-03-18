@@ -9,13 +9,13 @@ use Gaufrette\Util;
 
 class InMemoryBuffer implements Stream
 {
-    private $filesystem;
+    private \Gaufrette\Filesystem $filesystem;
     private $key;
-    private $mode;
+    private ?\Gaufrette\StreamMode $mode = null;
     private $content;
     private $numBytes;
     private $position;
-    private $synchronized;
+    private ?bool $synchronized = null;
 
     /**
      * @param Filesystem $filesystem The filesystem managing the file to stream
@@ -30,7 +30,7 @@ class InMemoryBuffer implements Stream
     /**
      * {@inheritdoc}
      */
-    public function open(StreamMode $mode)
+    public function open(StreamMode $mode): bool
     {
         $this->mode = $mode;
 
@@ -57,7 +57,7 @@ class InMemoryBuffer implements Stream
         return true;
     }
 
-    public function read($count)
+    public function read($count): string
     {
         if (false === $this->mode->allowsRead()) {
             throw new \LogicException('The stream does not allow read.');
@@ -99,14 +99,14 @@ class InMemoryBuffer implements Stream
         return $numWrittenBytes;
     }
 
-    public function close()
+    public function close(): void
     {
         if (!$this->synchronized) {
             $this->flush();
         }
     }
 
-    public function seek($offset, $whence = SEEK_SET)
+    public function seek($offset, $whence = SEEK_SET): bool
     {
         switch ($whence) {
             case SEEK_SET:
@@ -133,7 +133,7 @@ class InMemoryBuffer implements Stream
         return $this->position;
     }
 
-    public function flush()
+    public function flush(): bool
     {
         if ($this->synchronized) {
             return true;
@@ -148,7 +148,7 @@ class InMemoryBuffer implements Stream
         return true;
     }
 
-    public function eof()
+    public function eof(): bool
     {
         return $this->position >= $this->numBytes;
     }
@@ -187,7 +187,7 @@ class InMemoryBuffer implements Stream
     /**
      * {@inheritdoc}
      */
-    public function cast($castAst)
+    public function cast($castAst): bool
     {
         return false;
     }
@@ -204,10 +204,7 @@ class InMemoryBuffer implements Stream
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    protected function hasNewContentAtFurtherPosition()
+    protected function hasNewContentAtFurtherPosition(): bool
     {
         return $this->position > 0 && !$this->content;
     }

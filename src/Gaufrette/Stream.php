@@ -12,7 +12,6 @@ interface Stream
     /**
      * Opens the stream in the specified mode.
      *
-     * @param StreamMode $mode
      *
      * @return bool TRUE on success or FALSE on failure
      */

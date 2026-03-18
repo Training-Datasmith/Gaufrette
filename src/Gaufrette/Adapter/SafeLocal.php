@@ -13,7 +13,7 @@ class SafeLocal extends Local
     /**
      * {@inheritdoc}
      */
-    public function computeKey($path)
+    public function computeKey($path): string
     {
         return base64_decode(parent::computeKey($path));
     }

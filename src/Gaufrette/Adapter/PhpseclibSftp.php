@@ -9,7 +9,7 @@ use Gaufrette\File;
 
 class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
 {
-    protected $sftp;
+    protected \phpseclib\Net\SFTP $sftp;
     protected $directory;
     protected $create;
     protected $initialized = false;
@@ -72,7 +72,7 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         $this->initialize();
 
@@ -82,7 +82,7 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         $this->initialize();
 
@@ -156,7 +156,7 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function createFile($key, Filesystem $filesystem)
+    public function createFile($key, Filesystem $filesystem): \Gaufrette\File
     {
         $file = new File($key, $filesystem);
 
@@ -198,12 +198,15 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
         }
     }
 
-    protected function computePath($key)
+    protected function computePath($key): string
     {
         return $this->directory . '/' . ltrim($key, '/');
     }
 
-    protected function fetchKeys($directory = '', $onlyKeys = true)
+    /**
+     * @return mixed[]
+     */
+    protected function fetchKeys(string $directory = '', $onlyKeys = true): array
     {
         $keys = ['keys' => [], 'dirs' => []];
         $computedPath = $this->computePath($directory);
@@ -214,10 +217,12 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
 
         $list = $this->sftp->rawlist($computedPath);
         foreach ((array) $list as $filename => $stat) {
-            if ('.' === $filename || '..' === $filename) {
+            if ('.' === $filename) {
                 continue;
             }
-
+            if ('..' === $filename) {
+                continue;
+            }
             $path = ltrim($directory . '/' . $filename, '/');
             if (isset($stat['type']) && $stat['type'] === NET_SFTP_TYPE_DIRECTORY) {
                 $keys['dirs'][] = $path;

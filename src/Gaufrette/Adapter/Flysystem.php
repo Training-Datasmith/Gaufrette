@@ -20,7 +20,6 @@ class Flysystem implements Adapter, ListKeysAware
     private $config;
 
     /**
-     * @param AdapterInterface  $adapter
      * @param \League\Flysystem\Config|array|null $config
      */
     public function __construct(AdapterInterface $adapter, $config = null)
@@ -52,7 +51,7 @@ class Flysystem implements Adapter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return (bool) $this->adapter->has($key);
     }
@@ -60,17 +59,15 @@ class Flysystem implements Adapter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function keys()
+    public function keys(): array
     {
-        return array_map(function ($content) {
-            return $content['path'];
-        }, $this->adapter->listContents());
+        return array_map(fn(array $content) => $content['path'], $this->adapter->listContents());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function listKeys($prefix = '')
+    public function listKeys($prefix = ''): array
     {
         $dirs = [];
         $keys = [];

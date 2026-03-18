@@ -14,11 +14,10 @@ class Size
      *
      * @param string $content
      *
-     * @return int
      *
      * @todo handle the case the mbstring is not loaded
      */
-    public static function fromContent($content)
+    public static function fromContent($content): int
     {
         // Make sure to get the real length in byte and not
         // accidentally mistake some bytes as a UTF BOM.

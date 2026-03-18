@@ -13,7 +13,7 @@ use Gaufrette\StreamMode;
 class Local implements Stream
 {
     private $path;
-    private $mode;
+    private ?\Gaufrette\StreamMode $mode = null;
     private $fileHandle;
     private $mkdirMode;
 
@@ -30,7 +30,7 @@ class Local implements Stream
     /**
      * {@inheritdoc}
      */
-    public function open(StreamMode $mode)
+    public function open(StreamMode $mode): bool
     {
         $baseDirPath = \Gaufrette\Util\Path::dirname($this->path);
         if ($mode->allowsWrite() && !is_dir($baseDirPath)) {
@@ -159,7 +159,8 @@ class Local implements Stream
     {
         if ($this->fileHandle) {
             return fstat($this->fileHandle);
-        } elseif (!is_resource($this->fileHandle) && is_dir($this->path)) {
+        }
+        if (!is_resource($this->fileHandle) && is_dir($this->path)) {
             return stat($this->path);
         }
 

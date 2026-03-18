@@ -17,8 +17,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
     protected $service;
     /** @var string */
     protected $bucket;
-    /** @var array */
-    protected $options;
+    protected array $options;
     /** @var bool */
     protected $bucketExists;
     /** @var array */
@@ -27,9 +26,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
     protected $detectContentType;
 
     /**
-     * @param S3Client $service
      * @param string   $bucket
-     * @param array    $options
      * @param bool     $detectContentType
      */
     public function __construct(S3Client $service, $bucket, array $options = [], $detectContentType = false)
@@ -54,7 +51,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function setMetadata($key, $metadata)
+    public function setMetadata($key, $metadata): void
     {
         // BC with AmazonS3 adapter
         if (isset($metadata['contentType'])) {
@@ -192,8 +189,9 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
 
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function listKeys($prefix = '')
+    public function listKeys($prefix = ''): array
     {
         $this->ensureBucketExists();
 
@@ -216,7 +214,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         try {
             $this->service->deleteObject($this->getOptions($key));
@@ -237,10 +235,11 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
             'Prefix' => rtrim($this->computePath($key), '/') . '/',
             'MaxKeys' => 1,
         ]);
-        if (isset($result['Contents'])) {
-            if (is_array($result['Contents']) || $result['Contents'] instanceof \Countable) {
-                return count($result['Contents']) > 0;
-            }
+        if (!isset($result['Contents'])) {
+            return false;
+        }
+        if (is_countable($result['Contents'])) {
+            return count($result['Contents']) > 0;
         }
 
         return false;
@@ -255,7 +254,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
      * @throws \RuntimeException if the bucket does not exists or could not be
      *                           created
      */
-    protected function ensureBucketExists()
+    protected function ensureBucketExists(): bool
     {
         if ($this->bucketExists) {
             return true;
@@ -281,7 +280,10 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
         return true;
     }
 
-    protected function getOptions($key, array $options = [])
+    /**
+     * @return mixed[]
+     */
+    protected function getOptions($key, array $options = []): array
     {
         $options['ACL'] = $this->options['acl'];
         $options['Bucket'] = $this->bucket;
@@ -312,7 +314,7 @@ class AwsS3 implements Adapter, MetadataSupporter, ListKeysAware, SizeCalculator
      *
      * return string
      */
-    protected function computeKey($path)
+    protected function computeKey($path): string
     {
         return ltrim(substr($path, strlen($this->options['directory'])), '/');
     }

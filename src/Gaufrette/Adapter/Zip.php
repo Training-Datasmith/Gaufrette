@@ -27,7 +27,7 @@ class Zip implements Adapter
     public function __construct($zipFile)
     {
         if (!extension_loaded('zip')) {
-            throw new \RuntimeException(sprintf('Unable to use %s as the ZIP extension is not available.', __CLASS__));
+            throw new \RuntimeException(sprintf('Unable to use %s as the ZIP extension is not available.', self::class));
         }
 
         $this->zipFile = $zipFile;
@@ -65,15 +65,16 @@ class Zip implements Adapter
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return (boolean) $this->getStat($key);
     }
 
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function keys()
+    public function keys(): array
     {
         $keys = [];
 
@@ -89,7 +90,7 @@ class Zip implements Adapter
      *
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         return false;
     }
@@ -157,7 +158,7 @@ class Zip implements Adapter
         }
     }
 
-    protected function reinitZipArchive()
+    protected function reinitZipArchive(): self
     {
         $this->zipArchive = new ZipArchive();
 
@@ -172,15 +173,12 @@ class Zip implements Adapter
 
                     break;
                 case ZipArchive::ER_INVAL:
+                case ZipArchive::ER_NOENT:
                     $errMsg = 'Invalid argument.';
 
                     break;
                 case ZipArchive::ER_MEMORY:
                     $errMsg = 'Malloc failure.';
-
-                    break;
-                case ZipArchive::ER_NOENT:
-                    $errMsg = 'Invalid argument.';
 
                     break;
                 case ZipArchive::ER_NOZIP:
@@ -216,7 +214,7 @@ class Zip implements Adapter
      *
      * @throws \RuntimeException If file could not be saved
      */
-    protected function save()
+    protected function save(): bool
     {
         // Close to save modification
         if (!$this->zipArchive->close()) {

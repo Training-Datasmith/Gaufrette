@@ -11,8 +11,8 @@ class StreamMode
 {
     private $mode;
     private $base;
-    private $plus;
-    private $flag;
+    private bool $plus;
+    private string $flag;
 
     /**
      * @param string $mode A stream mode as for the use of fopen()
@@ -69,20 +69,16 @@ class StreamMode
 
     /**
      * Indicates whether the mode allows to open an existing file.
-     *
-     * @return bool
      */
-    public function allowsExistingFileOpening()
+    public function allowsExistingFileOpening(): bool
     {
         return 'x' !== $this->base;
     }
 
     /**
      * Indicates whether the mode allows to create a new file.
-     *
-     * @return bool
      */
-    public function allowsNewFileOpening()
+    public function allowsNewFileOpening(): bool
     {
         return 'r' !== $this->base;
     }
@@ -90,10 +86,8 @@ class StreamMode
     /**
      * Indicates whether the mode implies to delete the existing content of the
      * file when it already exists.
-     *
-     * @return bool
      */
-    public function impliesExistingContentDeletion()
+    public function impliesExistingContentDeletion(): bool
     {
         return 'w' === $this->base;
     }
@@ -101,10 +95,8 @@ class StreamMode
     /**
      * Indicates whether the mode implies positioning the cursor at the
      * beginning of the file.
-     *
-     * @return bool
      */
-    public function impliesPositioningCursorAtTheBeginning()
+    public function impliesPositioningCursorAtTheBeginning(): bool
     {
         return 'a' !== $this->base;
     }
@@ -112,30 +104,24 @@ class StreamMode
     /**
      * Indicates whether the mode implies positioning the cursor at the end of
      * the file.
-     *
-     * @return bool
      */
-    public function impliesPositioningCursorAtTheEnd()
+    public function impliesPositioningCursorAtTheEnd(): bool
     {
         return 'a' === $this->base;
     }
 
     /**
      * Indicates whether the stream is in binary mode.
-     *
-     * @return bool
      */
-    public function isBinary()
+    public function isBinary(): bool
     {
         return 'b' === $this->flag;
     }
 
     /**
      * Indicates whether the stream is in text mode.
-     *
-     * @return bool
      */
-    public function isText()
+    public function isText(): bool
     {
         return false === $this->isBinary();
     }

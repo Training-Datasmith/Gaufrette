@@ -13,10 +13,8 @@ class Checksum
      * Returns the checksum of the given content.
      *
      * @param string $content
-     *
-     * @return string
      */
-    public static function fromContent($content)
+    public static function fromContent($content): string
     {
         return md5($content);
     }

@@ -14,8 +14,8 @@ use Gaufrette\Filesystem;
 class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
 {
     /** @var null|resource|\FTP\Connection */
-    protected $connection = null;
-    protected $directory;
+    protected $connection;
+    protected string $directory;
     protected $host;
     protected $port;
     protected $username;
@@ -33,7 +33,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
      * @param string $host      The host of the ftp server
      * @param array  $options   The options like port, username, password, passive, create, mode
      */
-    public function __construct($directory, $host, $options = [])
+    public function __construct($directory, $host, array $options = [])
     {
         if (!extension_loaded('ftp')) {
             throw new \RuntimeException('Unable to use Gaufrette\Adapter\Ftp as the FTP extension is not available.');
@@ -102,7 +102,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -117,7 +117,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -182,7 +182,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function mtime($key)
+    public function mtime($key): int
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -199,7 +199,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -228,7 +228,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
      *
      * @return array An array of keys and dirs
      */
-    public function listDirectory($directory = '')
+    public function listDirectory($directory = ''): array
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -240,10 +240,12 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
 
         $fileData = $dirs = [];
         foreach ($items as $itemData) {
-            if ('..' === $itemData['name'] || '.' === $itemData['name']) {
+            if ('..' === $itemData['name']) {
                 continue;
             }
-
+            if ('.' === $itemData['name']) {
+                continue;
+            }
             $item = [
                 'name' => $itemData['name'],
                 'path' => trim(($directory ? $directory . '/' : '') . $itemData['name'], '/'),
@@ -269,7 +271,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * {@inheritdoc}
      */
-    public function createFile($key, Filesystem $filesystem)
+    public function createFile($key, Filesystem $filesystem): \Gaufrette\File
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -294,11 +296,10 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * @param string $key
      *
-     * @return int
      *
      * @throws \RuntimeException
      */
-    public function size($key)
+    public function size($key): int
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -338,7 +339,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
      *
      * @throws RuntimeException if the directory could not be created
      */
-    protected function createDirectory($directory)
+    protected function createDirectory(string $directory)
     {
         // create parent directory if needed
         $parent = \Gaufrette\Util\Path::dirname($directory);
@@ -355,10 +356,8 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
 
     /**
      * @param string $directory - full directory path
-     *
-     * @return bool
      */
-    private function isDir($directory)
+    private function isDir($directory): bool
     {
         if ('/' === $directory) {
             return true;
@@ -374,7 +373,10 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
         return true;
     }
 
-    private function fetchKeys($directory = '', $onlyKeys = true)
+    /**
+     * @return mixed[]
+     */
+    private function fetchKeys($directory = '', $onlyKeys = true): array
     {
         $directory = preg_replace('/^[\/]*([^\/].*)$/', '/$1', $directory);
 
@@ -391,7 +393,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
         $directories = [];
         $keys = ['keys' => [], 'dirs' => []];
 
-        foreach ((array) $lines as $line) {
+        foreach ($lines as $line) {
             if ('' === $prevLine && preg_match($regexDir, $line, $match)) {
                 $directory = $match[1];
                 unset($directories[$directory]);
@@ -403,8 +405,10 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
                 }
             } elseif (preg_match($regexItem, $line, $tokens)) {
                 $name = $tokens[3];
-
-                if ('.' === $name || '..' === $name) {
+                if ('.' === $name) {
+                    continue;
+                }
+                if ('..' === $name) {
                     continue;
                 }
 
@@ -437,11 +441,9 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * Parses the given raw list.
      *
-     * @param array $rawlist
      *
-     * @return array
      */
-    private function parseRawlist(array $rawlist)
+    private function parseRawlist(array $rawlist): array
     {
         $parsed = [];
         foreach ($rawlist as $line) {
@@ -459,7 +461,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
                     ];
                 }
             } elseif (count($infos) >= 4) {
-                $isDir = (boolean) ('<dir>' === $infos[2]);
+                $isDir = '<dir>' === $infos[2];
                 $parsed[] = [
                     'perms' => $isDir ? 'd' : '-',
                     'num' => '',
@@ -475,22 +477,18 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
 
     /**
      * Computes the path for the given key.
-     *
-     * @param string $key
      */
-    private function computePath($key)
+    private function computePath(string $key): string
     {
         return rtrim($this->directory, '/') . '/' . $key;
     }
 
     /**
      * Indicates whether the adapter has an open ftp connection.
-     *
-     * @return bool
      */
-    private function isConnected()
+    private function isConnected(): bool
     {
-        if (class_exists('\FTP\Connection')) {
+        if (class_exists(\FTP\Connection::class)) {
             return $this->connection instanceof \FTP\Connection;
         }
 
@@ -517,7 +515,7 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
      *
      * @throws RuntimeException if could not connect
      */
-    private function connect()
+    private function connect(): void
     {
         if ($this->ssl && !function_exists('ftp_ssl_connect')) {
             throw new \RuntimeException('This Server Has No SSL-FTP Available.');
@@ -582,14 +580,14 @@ class Ftp implements Adapter, FileFactory, ListKeysAware, SizeCalculator
     /**
      * Closes the adapter's ftp connection.
      */
-    public function close()
+    public function close(): void
     {
         if ($this->isConnected()) {
             ftp_close($this->connection);
         }
     }
 
-    private function isLinuxListing($info)
+    private function isLinuxListing($info): bool
     {
         return count($info) >= 9;
     }

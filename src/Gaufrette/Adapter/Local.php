@@ -77,7 +77,7 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $targetPath = $this->computePath($targetKey);
         $this->ensureDirectoryExists(\Gaufrette\Util\Path::dirname($targetPath), true);
@@ -88,7 +88,7 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return is_file($this->computePath($key));
     }
@@ -99,8 +99,9 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \OutOfBoundsException     If the computed path is out of the directory
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
+     * @return mixed[]
      */
-    public function keys()
+    public function keys(): array
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -147,7 +148,8 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
     {
         if ($this->isDirectory($key)) {
             return $this->deleteDirectory($this->computePath($key));
-        } elseif ($this->exists($key)) {
+        }
+        if ($this->exists($key)) {
             return unlink($this->computePath($key));
         }
 
@@ -157,13 +159,12 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
     /**
      * @param string $key
      *
-     * @return bool
      *
      * @throws \OutOfBoundsException     If the computed path is out of the directory
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         return is_dir($this->computePath($key));
     }
@@ -175,7 +176,7 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function createStream($key)
+    public function createStream($key): \Gaufrette\Stream\Local
     {
         return new Stream\Local($this->computePath($key), $this->mode);
     }
@@ -222,13 +223,12 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * Computes the key from the specified path.
      *
      * @param $path
-     * @return string
      *
      * @throws \OutOfBoundsException     If the computed path is out of the directory
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function computeKey($path)
+    public function computeKey($path): string
     {
         $path = $this->normalizePath($path);
 
@@ -246,7 +246,7 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \OutOfBoundsException     If the computed path is out of the directory
      * @throws \RuntimeException         If directory does not exists and cannot be created
      */
-    protected function computePath($key)
+    protected function computePath(string $key)
     {
         $this->ensureDirectoryExists($this->directory, $this->create);
 
@@ -266,7 +266,7 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
     {
         $path = Util\Path::normalize($path);
 
-        if (0 !== strpos($path, $this->directory)) {
+        if (0 !== strpos($path, (string) $this->directory)) {
             throw new \OutOfBoundsException(sprintf('The path "%s" is out of the filesystem.', $path));
         }
 

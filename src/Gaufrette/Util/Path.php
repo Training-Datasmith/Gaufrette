@@ -13,10 +13,8 @@ class Path
      * Normalizes the given path.
      *
      * @param string $path
-     *
-     * @return string
      */
-    public static function normalize($path)
+    public static function normalize($path): string
     {
         $path = str_replace('\\', '/', $path);
         $prefix = static::getAbsolutePrefix($path);
@@ -31,9 +29,9 @@ class Path
                 case '..':
                     if (0 !== count($tokens)) {
                         array_pop($tokens);
-
                         continue 2;
-                    } elseif (!empty($prefix)) {
+                    }
+                    if (!empty($prefix)) {
                         continue 2;
                     }
                 default:
@@ -48,10 +46,8 @@ class Path
      * Indicates whether the given path is absolute or not.
      *
      * @param string $path A normalized path
-     *
-     * @return bool
      */
-    public static function isAbsolute($path)
+    public static function isAbsolute($path): bool
     {
         return '' !== static::getAbsolutePrefix($path);
     }
@@ -60,10 +56,8 @@ class Path
      * Returns the absolute prefix of the given path.
      *
      * @param string $path A normalized path
-     *
-     * @return string
      */
-    public static function getAbsolutePrefix($path)
+    public static function getAbsolutePrefix($path): string
     {
         preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches);
 
@@ -79,11 +73,10 @@ class Path
      *
      * @param string $path
      *
-     * @return string
      *
      * @see http://php.net/manual/en/function.dirname.php
      */
-    public static function dirname($path)
+    public static function dirname($path): string
     {
         return str_replace('\\', '/', \dirname($path));
     }

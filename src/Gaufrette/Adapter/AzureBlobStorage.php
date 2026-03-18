@@ -28,10 +28,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     const ERROR_CONTAINER_ALREADY_EXISTS = 'ContainerAlreadyExists';
     const ERROR_CONTAINER_NOT_FOUND = 'ContainerNotFound';
 
-    /**
-     * @var AzureBlobStorage\BlobProxyFactoryInterface
-     */
-    protected $blobProxyFactory;
+    protected \Gaufrette\Adapter\AzureBlobStorage\BlobProxyFactoryInterface $blobProxyFactory;
 
     /**
      * @var string
@@ -59,11 +56,9 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     protected $createContainerOptions;
 
     /**
-     * @param AzureBlobStorage\BlobProxyFactoryInterface $blobProxyFactory
      * @param string|null                                $containerName
      * @param bool                                       $create
      * @param bool                                       $detectContentType
-     *
      * @throws \RuntimeException
      */
     public function __construct(BlobProxyFactoryInterface $blobProxyFactory, $containerName = null, $create = false, $detectContentType = true)
@@ -86,10 +81,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
         return $this->createContainerOptions;
     }
 
-    /**
-     * @param CreateContainerOptions $options
-     */
-    public function setCreateContainerOptions(CreateContainerOptions $options)
+    public function setCreateContainerOptions(CreateContainerOptions $options): void
     {
         $this->createContainerOptions = $options;
     }
@@ -97,12 +89,10 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * Creates a new container.
      *
-     * @param string                                                     $containerName
-     * @param \MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions $options
      *
      * @throws \RuntimeException if cannot create the container
      */
-    public function createContainer($containerName, CreateContainerOptions $options = null)
+    public function createContainer(string $containerName, CreateContainerOptions $options = null): void
     {
         $this->init();
 
@@ -129,12 +119,10 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * Deletes a container.
      *
-     * @param string                 $containerName
-     * @param BlobServiceOptions $options
      *
      * @throws \RuntimeException if cannot delete the container
      */
-    public function deleteContainer($containerName, BlobServiceOptions $options = null)
+    public function deleteContainer(string $containerName, BlobServiceOptions $options = null): void
     {
         $this->init();
 
@@ -162,7 +150,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function read($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $blob = $this->blobProxy->getBlob($containerName, $key);
@@ -183,7 +171,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function write($key, $content)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         if (class_exists(CreateBlockBlobOptions::class)) {
             $options = new CreateBlockBlobOptions();
@@ -223,10 +211,10 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         $listBlobsOptions = new ListBlobsOptions();
         $listBlobsOptions->setPrefix($key);
@@ -302,7 +290,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function mtime($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $properties = $this->blobProxy->getBlobProperties($containerName, $key);
@@ -321,7 +309,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function size($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $properties = $this->blobProxy->getBlobProperties($containerName, $key);
@@ -340,7 +328,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function mimeType($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $properties = $this->blobProxy->getBlobProperties($containerName, $key);
@@ -359,7 +347,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function checksum($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $properties = $this->blobProxy->getBlobProperties($containerName, $key);
@@ -378,10 +366,10 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $this->blobProxy->deleteBlob($containerName, $key);
@@ -399,12 +387,12 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $this->init();
 
-        list($sourceContainerName, $sourceKey) = $this->tokenizeKey($sourceKey);
-        list($targetContainerName, $targetKey) = $this->tokenizeKey($targetKey);
+        [$sourceContainerName, $sourceKey] = $this->tokenizeKey($sourceKey);
+        [$targetContainerName, $targetKey] = $this->tokenizeKey($targetKey);
 
         try {
             if ($this->multiContainerMode) {
@@ -424,7 +412,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         // Windows Azure Blob Storage does not support directories
         return false;
@@ -435,10 +423,10 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function setMetadata($key, $content)
+    public function setMetadata($key, $content): void
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $this->blobProxy->setBlobMetadata($containerName, $key, $content);
@@ -463,7 +451,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     public function getMetadata($key)
     {
         $this->init();
-        list($containerName, $key) = $this->tokenizeKey($key);
+        [$containerName, $key] = $this->tokenizeKey($key);
 
         try {
             $properties = $this->blobProxy->getBlobProperties($containerName, $key);
@@ -495,13 +483,11 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * Throws a runtime exception if a give ServiceException derived from a "container not found" error.
      *
-     * @param ServiceException $exception
-     * @param string           $action
      * @param string           $containerName
      *
      * @throws \RuntimeException
      */
-    protected function failIfContainerNotFound(ServiceException $exception, $action, $containerName)
+    protected function failIfContainerNotFound(ServiceException $exception, string $action, $containerName)
     {
         $errorCode = $this->getErrorCodeFromServiceException($exception);
 
@@ -517,7 +503,6 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * Extracts the error code from a service exception.
      *
-     * @param ServiceException $exception
      *
      * @return string
      */
@@ -551,10 +536,9 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * @param string $key
      *
-     * @return array
      * @throws \InvalidArgumentException
      */
-    private function tokenizeKey($key)
+    private function tokenizeKey($key): array
     {
         $containerName = $this->containerName;
         if (false === $this->multiContainerMode) {
@@ -575,11 +559,9 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
 
     /**
      * @param string $containerName
-     * @param null   $prefix
      *
-     * @return array
      */
-    private function fetchBlobs($containerName, $prefix = null)
+    private function fetchBlobs($containerName, $prefix = null): array
     {
         $blobList = $this->blobProxy->listBlobs($containerName);
 
@@ -587,7 +569,7 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
             function (Blob $blob) use ($prefix) {
                 $name = $blob->getName();
                 if (null !== $prefix) {
-                    $name = $prefix . '/' . $name;
+                    return $prefix . '/' . $name;
                 }
 
                 return $name;

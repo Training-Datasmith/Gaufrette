@@ -23,9 +23,9 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     public const OPTION_LOCATION = 'bucket_location';
     public const OPTION_STORAGE_CLASS = 'storage_class';
 
-    protected $service;
+    protected \Google\Service\Storage $service;
     protected $bucket;
-    protected $options = [
+    protected array $options = [
         self::OPTION_CREATE_BUCKET_IF_NOT_EXISTS => false,
         self::OPTION_STORAGE_CLASS => 'STANDARD',
         'directory' => '',
@@ -73,7 +73,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * @param array $options The new options
      */
-    public function setOptions($options)
+    public function setOptions($options): void
     {
         $this->options = array_replace($this->options, $options);
     }
@@ -91,7 +91,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
      *
      * @param string $bucket The new bucket name
      */
-    public function setBucket($bucket)
+    public function setBucket($bucket): void
     {
         $this->bucketExists = null;
         $this->bucket = $bucket;
@@ -204,7 +204,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         $this->ensureBucketExists();
         $path = $this->computePath($key);
@@ -242,7 +242,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         $this->ensureBucketExists();
         $path = $this->computePath($key);
@@ -259,7 +259,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $this->ensureBucketExists();
         $sourcePath = $this->computePath($sourceKey);
@@ -283,7 +283,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         if ($this->exists($key . '/')) {
             return true;
@@ -294,8 +294,9 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
 
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function listKeys($prefix = '')
+    public function listKeys($prefix = ''): array
     {
         $this->ensureBucketExists();
 
@@ -328,7 +329,7 @@ class GoogleCloudStorage implements Adapter, MetadataSupporter, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function setMetadata($key, $content)
+    public function setMetadata($key, $content): void
     {
         $path = $this->computePath($key);
 

@@ -22,9 +22,6 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
     /** @var Bucket */
     private $bucket;
 
-    /**
-     * @param Bucket $bucket
-     */
     public function __construct(Bucket $bucket)
     {
         if (!class_exists(Bucket::class)) {
@@ -63,14 +60,12 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
         } finally {
             fclose($stream);
         }
-
-        return false;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         return false;
     }
@@ -78,7 +73,7 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $metadata = $this->getMetadata($sourceKey);
         $writable = $this->bucket->openUploadStream($targetKey, ['metadata' => $metadata]);
@@ -99,15 +94,16 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return (boolean) $this->bucket->findOne(['filename' => $key]);
     }
 
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function keys()
+    public function keys(): array
     {
         $keys = [];
         $cursor = $this->bucket->find([], ['projection' => ['filename' => 1]]);
@@ -142,7 +138,7 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         if (null === $file = $this->bucket->findOne(['filename' => $key], ['projection' => ['_id' => 1]])) {
             return false;
@@ -156,7 +152,7 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
     /**
      * {@inheritdoc}
      */
-    public function setMetadata($key, $metadata)
+    public function setMetadata($key, $metadata): void
     {
         $this->metadata[$key] = $metadata;
     }
@@ -182,8 +178,9 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
 
     /**
      * {@inheritdoc}
+     * @return mixed[]
      */
-    public function listKeys($prefix = '')
+    public function listKeys($prefix = ''): array
     {
         $prefix = trim($prefix);
 

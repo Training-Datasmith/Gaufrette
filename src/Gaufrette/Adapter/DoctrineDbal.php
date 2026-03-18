@@ -16,9 +16,9 @@ use Doctrine\DBAL\Connection;
  */
 class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
 {
-    protected $connection;
+    protected \Doctrine\DBAL\Connection $connection;
     protected $table;
-    protected $columns = [
+    protected array $columns = [
         'key' => 'key',
         'content' => 'content',
         'mtime' => 'mtime',
@@ -46,7 +46,6 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
      */
     public function keys()
     {
-        $keys = [];
         $stmt = $this->connection->executeQuery(sprintf(
             'SELECT %s FROM %s',
             $this->getQuotedColumn('key'),
@@ -65,7 +64,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         return (boolean) $this->connection->update(
             $this->table,
@@ -93,7 +92,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, $method)) {
@@ -122,7 +121,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         return (boolean) $this->connection->delete(
             $this->table,
@@ -158,19 +157,19 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key)
+    public function isDirectory($key): bool
     {
         return false;
     }
 
-    private function getColumnValue($key, $column)
+    private function getColumnValue($key, string $column)
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, $method)) {
             $method = 'fetchColumn'; // BC layer for dbal 2.x
         }
 
-        $value = $this->connection->$method(
+        return $this->connection->$method(
             sprintf(
                 'SELECT %s FROM %s WHERE %s = :key',
                 $this->getQuotedColumn($column),
@@ -179,14 +178,12 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
             ),
             ['key' => $key]
         );
-
-        return $value;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function listKeys($prefix = '')
+    public function listKeys($prefix = ''): array
     {
         $prefix = trim($prefix);
 
@@ -208,9 +205,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
         return [
             'dirs' => [],
             'keys' => array_map(
-                function ($value) {
-                    return $value['_key'];
-                },
+                fn(array $value) => $value['_key'],
                 $keys
             ),
         ];

@@ -29,7 +29,7 @@ class InMemory implements Adapter, MimeTypeProvider
      *
      * @param array $files An array of files
      */
-    public function setFiles(array $files)
+    public function setFiles(array $files): void
     {
         $this->files = [];
         foreach ($files as $key => $file) {
@@ -53,7 +53,7 @@ class InMemory implements Adapter, MimeTypeProvider
      * @param string $content The content
      * @param int    $mtime   The last modified time (automatically set to now if NULL)
      */
-    public function setFile($key, $content = null, $mtime = null)
+    public function setFile($key, $content = null, $mtime = null): void
     {
         if (null === $mtime) {
             $mtime = time();
@@ -76,7 +76,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         $content = $this->read($sourceKey);
         $this->delete($sourceKey);
@@ -98,7 +98,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key): bool
     {
         return array_key_exists($key, $this->files);
     }
@@ -106,7 +106,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->files);
     }
@@ -122,7 +122,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         unset($this->files[$key]);
         clearstatcache();
@@ -133,7 +133,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($path)
+    public function isDirectory($path): bool
     {
         return false;
     }

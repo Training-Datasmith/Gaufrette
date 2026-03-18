@@ -12,7 +12,7 @@ use Gaufrette\Adapter\ListKeysAware;
  */
 class Filesystem implements FilesystemInterface
 {
-    protected $adapter;
+    protected \Gaufrette\Adapter $adapter;
 
     /**
      * Contains File objects created with $this->createFile() method.
@@ -52,7 +52,7 @@ class Filesystem implements FilesystemInterface
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($sourceKey, $targetKey): bool
     {
         self::assertValidKey($sourceKey);
         self::assertValidKey($targetKey);
@@ -130,7 +130,7 @@ class Filesystem implements FilesystemInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($key)
+    public function delete($key): bool
     {
         self::assertValidKey($key);
 
@@ -286,7 +286,7 @@ class Filesystem implements FilesystemInterface
      *
      * @throws Exception\FileNotFound when sourceKey does not exist
      */
-    private function assertHasFile($key)
+    private function assertHasFile($key): void
     {
         if (!$this->has($key)) {
             throw new Exception\FileNotFound($key);
@@ -297,10 +297,8 @@ class Filesystem implements FilesystemInterface
      * Checks if matching File object by given key exists in the fileRegister.
      *
      * @param string $key
-     *
-     * @return bool
      */
-    private function isFileInRegister($key)
+    private function isFileInRegister($key): bool
     {
         return array_key_exists($key, $this->fileRegister);
     }
@@ -308,7 +306,7 @@ class Filesystem implements FilesystemInterface
     /**
      * Clear files register.
      */
-    public function clearFileRegister()
+    public function clearFileRegister(): void
     {
         $this->fileRegister = [];
     }
@@ -318,7 +316,7 @@ class Filesystem implements FilesystemInterface
      *
      * @param string $key
      */
-    public function removeFromRegister($key)
+    public function removeFromRegister($key): void
     {
         if ($this->isFileInRegister($key)) {
             unset($this->fileRegister[$key]);
@@ -338,7 +336,7 @@ class Filesystem implements FilesystemInterface
      *
      * @throws \InvalidArgumentException Given $key should not be empty
      */
-    private static function assertValidKey($key)
+    private static function assertValidKey($key): void
     {
         if (empty($key)) {
             throw new \InvalidArgumentException('Object path is empty.');
