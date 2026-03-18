@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
@@ -61,7 +63,7 @@ class InMemory implements Adapter, MimeTypeProvider
 
         $this->files[$key] = [
             'content' => (string) $content,
-            'mtime' => (integer) $mtime,
+            'mtime' => (int) $mtime,
         ];
     }
 
@@ -81,7 +83,7 @@ class InMemory implements Adapter, MimeTypeProvider
         $content = $this->read($sourceKey);
         $this->delete($sourceKey);
 
-        return (boolean) $this->write($targetKey, $content);
+        return (bool) $this->write($targetKey, $content);
     }
 
     /**

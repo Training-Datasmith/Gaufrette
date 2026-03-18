@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Util;
 
 /**
@@ -34,6 +36,7 @@ class Path
                     if (!empty($prefix)) {
                         continue 2;
                     }
+                    // no break
                 default:
                     $tokens[] = $part;
             }

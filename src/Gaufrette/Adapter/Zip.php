@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
-use ZipArchive;
 use Gaufrette\Adapter;
 use Gaufrette\Util;
+use ZipArchive;
 
 /**
  * ZIP Archive adapter.
@@ -67,7 +69,7 @@ class Zip implements Adapter
      */
     public function exists($key): bool
     {
-        return (boolean) $this->getStat($key);
+        return (bool) $this->getStat($key);
     }
 
     /**

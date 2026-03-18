@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
-use phpseclib\Net\SFTP as SecLibSFTP;
-use Gaufrette\Filesystem;
 use Gaufrette\File;
+use Gaufrette\Filesystem;
+use phpseclib\Net\SFTP as SecLibSFTP;
 
 class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
 {

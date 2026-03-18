@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Gaufrette;
 
 use Gaufrette\Filesystem;
@@ -7,7 +9,7 @@ use PhpSpec\ObjectBehavior;
 
 class FilesystemMapSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Gaufrette\FilesystemMap');
     }
@@ -15,7 +17,7 @@ class FilesystemMapSpec extends ObjectBehavior
     /**
      * @param Gaufrette\Filesystem $filesystem
      */
-    function it_checks_if_has_mapped_filesystem(Filesystem $filesystem)
+    public function it_checks_if_has_mapped_filesystem(Filesystem $filesystem)
     {
         $this->set('some', $filesystem);
         $this->has('some')->shouldReturn(true);
@@ -25,13 +27,13 @@ class FilesystemMapSpec extends ObjectBehavior
     /**
      * @param Gaufrette\Filesystem $filesystem
      */
-    function it_sets_mapped_filesystem(Filesystem $filesystem)
+    public function it_sets_mapped_filesystem(Filesystem $filesystem)
     {
         $this->set('some', $filesystem);
         $this->get('some')->shouldReturn($filesystem);
     }
 
-    function it_fails_when_get_filesystem_which_was_not_mapped()
+    public function it_fails_when_get_filesystem_which_was_not_mapped()
     {
         $this
             ->shouldThrow(new \InvalidArgumentException('There is no filesystem defined having "some" name.'))
@@ -42,7 +44,7 @@ class FilesystemMapSpec extends ObjectBehavior
     /**
      * @param Gaufrette\Filesystem $filesystem
      */
-    function it_removes_mapped_filesystem(Filesystem $filesystem)
+    public function it_removes_mapped_filesystem(Filesystem $filesystem)
     {
         $this->set('some', $filesystem);
         $this->remove('some');
@@ -50,7 +52,7 @@ class FilesystemMapSpec extends ObjectBehavior
         $this->has('some')->shouldReturn(false);
     }
 
-    function it_fails_when_try_to_remove_filesystem_which_was_not_mapped()
+    public function it_fails_when_try_to_remove_filesystem_which_was_not_mapped()
     {
         $this
             ->shouldThrow(new \InvalidArgumentException('Cannot remove the "some" filesystem as it is not defined.'))
@@ -61,7 +63,7 @@ class FilesystemMapSpec extends ObjectBehavior
     /**
      * @param Gaufrette\Filesystem $filesystem
      */
-    function it_removes_all_filesystems(Filesystem $filesystem)
+    public function it_removes_all_filesystems(Filesystem $filesystem)
     {
         $this->set('some', $filesystem);
         $this->set('other', $filesystem);

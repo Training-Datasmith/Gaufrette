@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Stream;
 
-use Gaufrette\Stream;
 use Gaufrette\Filesystem;
+use Gaufrette\Stream;
 use Gaufrette\StreamMode;
 use Gaufrette\Util;
 

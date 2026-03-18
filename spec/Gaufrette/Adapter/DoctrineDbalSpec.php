@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Gaufrette\Adapter;
 
 //hack - mock php built-in functions
@@ -15,22 +17,22 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function let(Connection $connection)
+    public function let(Connection $connection)
     {
         $this->beConstructedWith($connection, 'someTableName');
     }
 
-    function it_is_adapter()
+    public function it_is_adapter()
     {
         $this->shouldHaveType('Gaufrette\Adapter');
     }
 
-    function it_is_checksum_calculator()
+    public function it_is_checksum_calculator()
     {
         $this->shouldHaveType('Gaufrette\Adapter\ChecksumCalculator');
     }
 
-    function it_does_not_handle_directories()
+    public function it_does_not_handle_directories()
     {
         $this->isDirectory('filename')->shouldReturn(false);
     }
@@ -38,7 +40,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_checks_if_file_exists(Connection $connection)
+    public function it_checks_if_file_exists(Connection $connection)
     {
         $connection
             ->quoteIdentifier(Argument::any())
@@ -65,7 +67,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_writes_to_new_file(Connection $connection)
+    public function it_writes_to_new_file(Connection $connection)
     {
         $connection
             ->quoteIdentifier(Argument::any())
@@ -99,7 +101,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_write_file(Connection $connection)
+    public function it_write_file(Connection $connection)
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, 'fetchAllAssociative')) {
@@ -134,7 +136,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_reads_file(Connection $connection)
+    public function it_reads_file(Connection $connection)
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, 'fetchAllAssociative')) {
@@ -156,7 +158,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_calculates_checksum(Connection $connection)
+    public function it_calculates_checksum(Connection $connection)
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, 'fetchAllAssociative')) {
@@ -178,7 +180,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_gets_mtime(Connection $connection)
+    public function it_gets_mtime(Connection $connection)
     {
         $method = 'fetchOne'; // dbal 3.x
         if (!method_exists(Connection::class, 'fetchAllAssociative')) {
@@ -200,7 +202,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_renames_file(Connection $connection)
+    public function it_renames_file(Connection $connection)
     {
         $connection
             ->quoteIdentifier(Argument::any())
@@ -226,7 +228,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_get_keys(Connection $connection, $result)
+    public function it_get_keys(Connection $connection, $result)
     {
         if (class_exists(Result::class)) {
             // dbal 3.x
@@ -253,7 +255,7 @@ class DoctrineDbalSpec extends ObjectBehavior
     /**
      * @param \Doctrine\DBAL\Connection $connection
      */
-    function it_deletes_file(Connection $connection)
+    public function it_deletes_file(Connection $connection)
     {
         $connection
             ->quoteIdentifier(Argument::any())

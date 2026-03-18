@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Functional\Adapter;
 
 use AsyncAws\SimpleS3\SimpleS3Client;

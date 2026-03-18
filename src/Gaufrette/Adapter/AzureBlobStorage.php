@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
-use Gaufrette\Util;
 use Gaufrette\Adapter\AzureBlobStorage\BlobProxyFactoryInterface;
+use Gaufrette\Util;
 use MicrosoftAzure\Storage\Blob\Models\Blob;
 use MicrosoftAzure\Storage\Blob\Models\BlobServiceOptions;
 use MicrosoftAzure\Storage\Blob\Models\Container;
@@ -25,8 +27,8 @@ class AzureBlobStorage implements Adapter, MetadataSupporter, SizeCalculator, Ch
     /**
      * Error constants.
      */
-    const ERROR_CONTAINER_ALREADY_EXISTS = 'ContainerAlreadyExists';
-    const ERROR_CONTAINER_NOT_FOUND = 'ContainerNotFound';
+    public const ERROR_CONTAINER_ALREADY_EXISTS = 'ContainerAlreadyExists';
+    public const ERROR_CONTAINER_NOT_FOUND = 'ContainerNotFound';
 
     protected \Gaufrette\Adapter\AzureBlobStorage\BlobProxyFactoryInterface $blobProxyFactory;
 

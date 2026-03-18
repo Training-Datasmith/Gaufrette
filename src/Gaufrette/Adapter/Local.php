@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
-use Gaufrette\Util;
 use Gaufrette\Adapter;
 use Gaufrette\Stream;
+use Gaufrette\Util;
 
 /**
  * Adapter for the local filesystem.

@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Functional\Adapter;
 
-use Gaufrette\Filesystem;
 use Gaufrette\Adapter\SafeLocal;
+use Gaufrette\Filesystem;
 
 class SafeLocalTest extends FunctionalTestCase
 {

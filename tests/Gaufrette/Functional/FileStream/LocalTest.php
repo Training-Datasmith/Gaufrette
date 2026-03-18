@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Functional\FileStream;
 
-use Gaufrette\Filesystem;
 use Gaufrette\Adapter\Local as LocalAdapter;
+use Gaufrette\Filesystem;
 
 class LocalTest extends FunctionalTestCase
 {

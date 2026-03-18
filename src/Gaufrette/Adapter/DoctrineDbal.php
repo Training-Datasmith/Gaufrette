@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Result;
 use Gaufrette\Adapter;
 use Gaufrette\Util;
-use Doctrine\DBAL\Connection;
 
 /**
  * Doctrine DBAL adapter.
@@ -66,7 +68,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
      */
     public function rename($sourceKey, $targetKey): bool
     {
-        return (boolean) $this->connection->update(
+        return (bool) $this->connection->update(
             $this->table,
             [$this->getQuotedColumn('key') => $targetKey],
             [$this->getQuotedColumn('key') => $sourceKey]
@@ -99,7 +101,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
             $method = 'fetchColumn'; // BC layer for dbal 2.x
         }
 
-        return (boolean) $this->connection->$method(
+        return (bool) $this->connection->$method(
             sprintf(
                 'SELECT COUNT(%s) FROM %s WHERE %s = :key',
                 $this->getQuotedColumn('key'),
@@ -123,7 +125,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
      */
     public function delete($key): bool
     {
-        return (boolean) $this->connection->delete(
+        return (bool) $this->connection->delete(
             $this->table,
             [$this->getQuotedColumn('key') => $key]
         );
@@ -205,7 +207,7 @@ class DoctrineDbal implements Adapter, ChecksumCalculator, ListKeysAware
         return [
             'dirs' => [],
             'keys' => array_map(
-                fn(array $value) => $value['_key'],
+                fn (array $value) => $value['_key'],
                 $keys
             ),
         ];

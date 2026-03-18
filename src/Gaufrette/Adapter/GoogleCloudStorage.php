@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
+use Google\Service\Exception as ServiceException;
 use Google\Service\Storage;
 use Google\Service\Storage\Bucket;
-use Google\Service\Storage\StorageObject;
-use Google\Service\Exception as ServiceException;
 use Google\Service\Storage\BucketIamConfiguration;
 use Google\Service\Storage\BucketIamConfigurationUniformBucketLevelAccess;
+use Google\Service\Storage\StorageObject;
 use GuzzleHttp;
 
 /**

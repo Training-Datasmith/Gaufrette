@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Gaufrette\Adapter;
 
 use MongoDB\BSON\UTCDateTime;
@@ -12,12 +14,12 @@ class GridFSSpec extends ObjectBehavior
 {
     private $resources = [];
 
-    function let(Bucket $bucket)
+    public function let(Bucket $bucket)
     {
         $this->beConstructedWith($bucket);
     }
 
-    function letGo()
+    public function letGo()
     {
         array_map(function ($res) {
             if (is_resource($res)) {
@@ -26,27 +28,27 @@ class GridFSSpec extends ObjectBehavior
         }, $this->resources);
     }
 
-    function it_is_adapter()
+    public function it_is_adapter()
     {
         $this->shouldHaveType('Gaufrette\Adapter');
     }
 
-    function it_is_checksum_calculator()
+    public function it_is_checksum_calculator()
     {
         $this->shouldHaveType('Gaufrette\Adapter\ChecksumCalculator');
     }
 
-    function it_supports_metadata()
+    public function it_supports_metadata()
     {
         $this->shouldHaveType('Gaufrette\Adapter\MetadataSupporter');
     }
 
-    function it_supports_native_list_keys()
+    public function it_supports_native_list_keys()
     {
         $this->shouldHaveType('Gaufrette\Adapter\ListKeysAware');
     }
 
-    function it_reads_file($bucket)
+    public function it_reads_file($bucket)
     {
         $this->resources[] = $readable = fopen('php://memory', 'rw');
         fwrite($readable, 'some content');
@@ -61,14 +63,14 @@ class GridFSSpec extends ObjectBehavior
         $this->read('filename')->shouldReturn('some content');
     }
 
-    function it_does_not_fail_when_cannot_read($bucket)
+    public function it_does_not_fail_when_cannot_read($bucket)
     {
         $bucket->openDownloadStreamByName('filename')->willThrow(FileNotFoundException::class);
 
         $this->read('filename')->shouldReturn(false);
     }
 
-    function it_checks_if_file_exists($bucket, BSONDocument $file)
+    public function it_checks_if_file_exists($bucket, BSONDocument $file)
     {
         $bucket
             ->findOne(['filename' => 'filename'])
@@ -83,7 +85,7 @@ class GridFSSpec extends ObjectBehavior
         $this->exists('filename2')->shouldReturn(false);
     }
 
-    function it_deletes_file($bucket)
+    public function it_deletes_file($bucket)
     {
         $bucket
             ->findOne(['filename' => 'filename'], ['projection' => ['_id' => 1]])
@@ -94,14 +96,14 @@ class GridFSSpec extends ObjectBehavior
         $this->delete('filename')->shouldReturn(true);
     }
 
-    function it_does_not_delete_file($bucket)
+    public function it_does_not_delete_file($bucket)
     {
         $bucket->findOne(['filename' => 'filename'], ['projection' => ['_id' => 1]])->willReturn(null);
 
         $this->delete('filename')->shouldReturn(false);
     }
 
-    function it_writes_file($bucket)
+    public function it_writes_file($bucket)
     {
         $this->resources[] = $writable = fopen('php://memory', 'rw');
 
@@ -117,7 +119,7 @@ class GridFSSpec extends ObjectBehavior
         ;
     }
 
-    function it_renames_file($bucket)
+    public function it_renames_file($bucket)
     {
         $this->resources[] = $writable = fopen('php://memory', 'rw');
         $this->resources[] = $readable = fopen('php://memory', 'rw');
@@ -137,7 +139,7 @@ class GridFSSpec extends ObjectBehavior
         $this->rename('filename', 'otherFilename')->shouldReturn(true);
     }
 
-    function it_fetches_keys($bucket)
+    public function it_fetches_keys($bucket)
     {
         $bucket
             ->find([], ['projection' => ['filename' => 1]])
@@ -147,7 +149,7 @@ class GridFSSpec extends ObjectBehavior
         $this->keys()->shouldReturn(['filename', 'otherFilename']);
     }
 
-    function it_fetches_mtime($bucket)
+    public function it_fetches_mtime($bucket)
     {
         $bucket
             ->findOne(['filename' => 'filename'], ['projection' => ['uploadDate' => 1]])
@@ -157,7 +159,7 @@ class GridFSSpec extends ObjectBehavior
         $this->mtime('filename')->shouldReturn(12345);
     }
 
-    function it_calculates_checksum($bucket)
+    public function it_calculates_checksum($bucket)
     {
         $bucket
             ->findOne(['filename' => 'filename'], ['projection' => ['md5' => 1]])

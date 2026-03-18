@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
@@ -96,7 +98,7 @@ class GridFS implements Adapter, ChecksumCalculator, MetadataSupporter, ListKeys
      */
     public function exists($key): bool
     {
-        return (boolean) $this->bucket->findOne(['filename' => $key]);
+        return (bool) $this->bucket->findOne(['filename' => $key]);
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
@@ -61,7 +63,7 @@ class Flysystem implements Adapter, ListKeysAware
      */
     public function keys(): array
     {
-        return array_map(fn(array $content) => $content['path'], $this->adapter->listContents());
+        return array_map(fn (array $content) => $content['path'], $this->adapter->listContents());
     }
 
     /**

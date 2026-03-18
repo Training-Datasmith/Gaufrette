@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Functional\Adapter;
 
 use Aws\S3\S3Client;

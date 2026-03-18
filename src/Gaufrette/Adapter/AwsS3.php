@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Gaufrette\Adapter;
 
-use Gaufrette\Adapter;
 use Aws\S3\S3Client;
+use Gaufrette\Adapter;
 use Gaufrette\Util;
 
 /**
