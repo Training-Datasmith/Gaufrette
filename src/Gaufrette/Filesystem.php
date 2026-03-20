@@ -20,23 +20,33 @@ class Filesystem implements Filesystem_Interface
      */
     protected $file_register = [];
     /**
-     * @param Adapter $adapter A configured Adapter instance
+     * Creates a Filesystem backed by the given adapter.
+     *
+     * @param Adapter $adapter A fully configured Adapter instance (Local, S3, Azure, …).
      */
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
     }
+
     /**
-     * Returns the adapter.
+     * Returns the underlying adapter for this filesystem.
      *
-     * @return Adapter
+     * @return Adapter The adapter instance passed at construction time.
      */
-    public function get_adapter()
+    public function get_adapter(): Adapter
     {
         return $this->adapter;
     }
+
     /**
-     * {@inheritdoc}
+     * Returns whether a file exists at the given key.
+     *
+     * @param string $key The file key (path) to check.
+     *
+     * @return bool `true` if the file exists in the backend storage.
+     *
+     * @throws \InvalidArgumentException If $key is empty or invalid.
      */
     public function has($key)
     {
@@ -75,7 +85,17 @@ class Filesystem implements Filesystem_Interface
         return $this->create_file($key);
     }
     /**
-     * {@inheritdoc}
+     * Writes content to the given key, creating or overwriting the file.
+     *
+     * @param string $key       The target file key (path).
+     * @param string $content   The raw content to write.
+     * @param bool   $overwrite Whether to allow overwriting an existing file (default: false).
+     *
+     * @return int The number of bytes written.
+     *
+     * @throws Exception\File_Already_Exists If the file already exists and $overwrite is false.
+     * @throws \RuntimeException             If the adapter write operation fails.
+     * @throws \InvalidArgumentException     If $key is empty or invalid.
      */
     public function write($key, $content, $overwrite = false)
     {
@@ -90,7 +110,15 @@ class Filesystem implements Filesystem_Interface
         return $num_bytes;
     }
     /**
-     * {@inheritdoc}
+     * Reads and returns the full content of a file.
+     *
+     * @param string $key The file key (path) to read.
+     *
+     * @return string The raw file contents.
+     *
+     * @throws Exception\File_Not_Found If no file exists at $key.
+     * @throws \RuntimeException        If the adapter read operation fails.
+     * @throws \InvalidArgumentException If $key is empty or invalid.
      */
     public function read($key)
     {
@@ -103,7 +131,15 @@ class Filesystem implements Filesystem_Interface
         return $content;
     }
     /**
-     * {@inheritdoc}
+     * Deletes the file at the given key.
+     *
+     * @param string $key The file key (path) to delete.
+     *
+     * @return bool `true` on success (always — throws on failure).
+     *
+     * @throws Exception\File_Not_Found If no file exists at $key.
+     * @throws \RuntimeException        If the adapter delete operation fails.
+     * @throws \InvalidArgumentException If $key is empty or invalid.
      */
     public function delete($key): bool
     {
@@ -116,7 +152,11 @@ class Filesystem implements Filesystem_Interface
         throw new \RuntimeException(sprintf('Could not remove the "%s" key.', $key));
     }
     /**
-     * {@inheritdoc}
+     * Returns all keys (file paths) known to this filesystem.
+     *
+     * @return string[] An unordered list of all file keys in the storage backend.
+     *
+     * @complexity O(n) — requires listing all entries in the backend.
      */
     public function keys()
     {
