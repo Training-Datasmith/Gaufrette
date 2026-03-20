@@ -1,32 +1,23 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Exception;
 
 use Gaufrette\Exception;
-
 /**
  * Exception to be thrown when an unexpected file exists.
  *
  * @author  Antoine Hérault <antoine.herault@gmail.com>
  */
-class UnexpectedFile extends \RuntimeException implements Exception
+class Unexpected_File extends \RuntimeException implements Exception
 {
     private $key;
-
     public function __construct($key, $code = 0, \Exception $previous = null)
     {
         $this->key = $key;
-
-        parent::__construct(
-            sprintf('The file "%s" was not supposed to exist.', $key),
-            $code,
-            $previous
-        );
+        parent::__construct(sprintf('The file "%s" was not supposed to exist.', $key), $code, $previous);
     }
-
-    public function getKey()
+    public function get_key()
     {
         return $this->key;
     }

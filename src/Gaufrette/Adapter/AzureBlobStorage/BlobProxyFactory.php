@@ -1,45 +1,40 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Gaufrette\Adapter\Azure_Blob_Storage;
 
-namespace Gaufrette\Adapter\AzureBlobStorage;
-
-use MicrosoftAzure\Storage\Blob\BlobRestProxy;
-use MicrosoftAzure\Storage\Common\ServicesBuilder;
-
+use Microsoft_Azure\Storage\Blob\Blob_Rest_Proxy;
+use Microsoft_Azure\Storage\Common\Services_Builder;
 /**
  * Basic implementation for a Blob proxy factory.
  *
  * @author Luciano Mammino <lmammino@oryzone.com>
  */
-class BlobProxyFactory implements BlobProxyFactoryInterface
+class Blob_Proxy_Factory implements Blob_Proxy_Factory_Interface
 {
     /**
      * @var string
      */
-    protected $connectionString;
-
+    protected $connection_string;
     /**
      * @param string $connectionString
      */
-    public function __construct($connectionString)
+    public function __construct($connection_string)
     {
-        if (!class_exists(ServicesBuilder::class) && !class_exists(BlobRestProxy::class)) {
+        if (!class_exists(Services_Builder::class) && !class_exists(Blob_Rest_Proxy::class)) {
             throw new \LogicException('You need to install package "microsoft/azure-storage-blob" to use this adapter');
         }
-        $this->connectionString = $connectionString;
+        $this->connection_string = $connection_string;
     }
-
     /**
      * {@inheritdoc}
      */
     public function create()
     {
-        if (class_exists(ServicesBuilder::class)) {
+        if (class_exists(Services_Builder::class)) {
             // for microsoft/azure-storage < 1.0
-            return ServicesBuilder::getInstance()->createBlobService($this->connectionString);
+            return Services_Builder::get_instance()->create_blob_service($this->connection_string);
         }
-
-        return BlobRestProxy::createBlobService($this->connectionString);
+        return Blob_Rest_Proxy::create_blob_service($this->connection_string);
     }
 }

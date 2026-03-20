@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
 use Gaufrette\Util;
-
 /**
  * In memory adapter.
  *
@@ -14,40 +12,32 @@ use Gaufrette\Util;
  *
  * @author Antoine Hérault <antoine.herault@gmail.com>
  */
-class InMemory implements Adapter, MimeTypeProvider
+class In_Memory implements Adapter, Mime_Type_Provider
 {
     protected $files = [];
-
     /**
      * @param array $files An array of files
      */
     public function __construct(array $files = [])
     {
-        $this->setFiles($files);
+        $this->set_files($files);
     }
-
     /**
      * Defines the files.
      *
      * @param array $files An array of files
      */
-    public function setFiles(array $files): void
+    public function set_files(array $files): void
     {
         $this->files = [];
         foreach ($files as $key => $file) {
             if (!is_array($file)) {
                 $file = ['content' => $file];
             }
-
-            $file = array_merge([
-                'content' => null,
-                'mtime' => null,
-            ], $file);
-
-            $this->setFile($key, $file['content'], $file['mtime']);
+            $file = array_merge(['content' => null, 'mtime' => null], $file);
+            $this->set_file($key, $file['content'], $file['mtime']);
         }
     }
-
     /**
      * Defines a file.
      *
@@ -55,18 +45,13 @@ class InMemory implements Adapter, MimeTypeProvider
      * @param string $content The content
      * @param int    $mtime   The last modified time (automatically set to now if NULL)
      */
-    public function setFile($key, $content = null, $mtime = null): void
+    public function set_file($key, $content = null, $mtime = null): void
     {
         if (null === $mtime) {
             $mtime = time();
         }
-
-        $this->files[$key] = [
-            'content' => (string) $content,
-            'mtime' => (int) $mtime,
-        ];
+        $this->files[$key] = ['content' => (string) $content, 'mtime' => (int) $mtime];
     }
-
     /**
      * {@inheritdoc}
      */
@@ -74,18 +59,15 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         return $this->files[$key]['content'];
     }
-
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey): bool
+    public function rename($source_key, $target_key): bool
     {
-        $content = $this->read($sourceKey);
-        $this->delete($sourceKey);
-
-        return (bool) $this->write($targetKey, $content);
+        $content = $this->read($source_key);
+        $this->delete($source_key);
+        return (bool) $this->write($target_key, $content);
     }
-
     /**
      * {@inheritdoc}
      */
@@ -93,10 +75,8 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         $this->files[$key]['content'] = $content;
         $this->files[$key]['mtime'] = time();
-
-        return Util\Size::fromContent($content);
+        return Util\Size::from_content($content);
     }
-
     /**
      * {@inheritdoc}
      */
@@ -104,7 +84,6 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         return array_key_exists($key, $this->files);
     }
-
     /**
      * {@inheritdoc}
      */
@@ -112,7 +91,6 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         return array_keys($this->files);
     }
-
     /**
      * {@inheritdoc}
      */
@@ -120,7 +98,6 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         return $this->files[$key]['mtime'] ?? false;
     }
-
     /**
      * {@inheritdoc}
      */
@@ -128,25 +105,21 @@ class InMemory implements Adapter, MimeTypeProvider
     {
         unset($this->files[$key]);
         clearstatcache();
-
         return true;
     }
-
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($path): bool
+    public function is_directory($path): bool
     {
         return false;
     }
-
     /**
      * {@inheritdoc}
      */
-    public function mimeType($key)
+    public function mime_type($key)
     {
-        $fileInfo = new \finfo(FILEINFO_MIME_TYPE);
-
-        return $fileInfo->buffer($this->files[$key]['content']);
+        $file_info = new \finfo(FILEINFO_MIME_TYPE);
+        return $file_info->buffer($this->files[$key]['content']);
     }
 }

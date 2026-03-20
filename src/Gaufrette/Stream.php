@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
 /**
@@ -17,8 +16,7 @@ interface Stream
      *
      * @return bool TRUE on success or FALSE on failure
      */
-    public function open(StreamMode $mode);
-
+    public function open(Stream_Mode $mode);
     /**
      * Reads the specified number of bytes from the current position.
      *
@@ -30,7 +28,6 @@ interface Stream
      * @return string
      */
     public function read($count);
-
     /**
      * Writes the specified data.
      *
@@ -42,7 +39,6 @@ interface Stream
      * @return int The number of bytes that were successfully written
      */
     public function write($data);
-
     /**
      * Closes the stream.
      *
@@ -50,7 +46,6 @@ interface Stream
      * should do so
      */
     public function close();
-
     /**
      * Flushes the output.
      *
@@ -60,7 +55,6 @@ interface Stream
      * @return bool TRUE on success or FALSE on failure
      */
     public function flush();
-
     /**
      * Seeks to the specified offset.
      *
@@ -70,28 +64,24 @@ interface Stream
      * @return bool
      */
     public function seek($offset, $whence = SEEK_SET);
-
     /**
      * Returns the current position.
      *
      * @return int
      */
     public function tell();
-
     /**
      * Indicates whether the current position is the end-of-file.
      *
      * @return bool
      */
     public function eof();
-
     /**
      * Gathers statistics of the stream.
      *
      * @return array
      */
     public function stat();
-
     /**
      * Retrieve the underlying resource.
      *
@@ -99,8 +89,7 @@ interface Stream
      *
      * @return mixed using resource or false
      */
-    public function cast($castAs);
-
+    public function cast($cast_as);
     /**
      * Delete a file.
      *

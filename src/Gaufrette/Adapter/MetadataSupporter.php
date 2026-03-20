@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,18 +8,17 @@ namespace Gaufrette\Adapter;
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-interface MetadataSupporter
+interface Metadata_Supporter
 {
     /**
      * @param string $key
      * @param array  $content
      */
-    public function setMetadata($key, $content);
-
+    public function set_metadata($key, $content);
     /**
      * @param string $key
      *
      * @return array
      */
-    public function getMetadata($key);
+    public function get_metadata($key);
 }

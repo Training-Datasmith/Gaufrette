@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Util;
 
 /**
@@ -19,11 +18,10 @@ class Path
     public static function normalize($path): string
     {
         $path = str_replace('\\', '/', $path);
-        $prefix = static::getAbsolutePrefix($path);
+        $prefix = static::get_absolute_prefix($path);
         $path = substr($path, strlen($prefix));
         $parts = array_filter(explode('/', $path), 'strlen');
         $tokens = [];
-
         foreach ($parts as $part) {
             switch ($part) {
                 case '.':
@@ -36,41 +34,35 @@ class Path
                     if (!empty($prefix)) {
                         continue 2;
                     }
-                    // no break
+                // no break
                 default:
                     $tokens[] = $part;
             }
         }
-
         return $prefix . implode('/', $tokens);
     }
-
     /**
      * Indicates whether the given path is absolute or not.
      *
      * @param string $path A normalized path
      */
-    public static function isAbsolute($path): bool
+    public static function is_absolute($path): bool
     {
-        return '' !== static::getAbsolutePrefix($path);
+        return '' !== static::get_absolute_prefix($path);
     }
-
     /**
      * Returns the absolute prefix of the given path.
      *
      * @param string $path A normalized path
      */
-    public static function getAbsolutePrefix($path): string
+    public static function get_absolute_prefix($path): string
     {
         preg_match('|^(?P<prefix>([a-zA-Z]+:)?//?)|', $path, $matches);
-
         if (empty($matches['prefix'])) {
             return '';
         }
-
         return strtolower($matches['prefix']);
     }
-
     /**
      * Wrap native dirname function in order to handle only UNIX-style paths
      *

@@ -1,175 +1,143 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
 use Gaufrette\File;
 use Gaufrette\Filesystem;
 use phpseclib\Net\SFTP as SecLibSFTP;
-
-class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
+class Phpseclib_Sftp implements Adapter, File_Factory, List_Keys_Aware
 {
     protected \phpseclib\Net\SFTP $sftp;
     protected $directory;
     protected $create;
     protected $initialized = false;
-
     /**
      * @param SecLibSFTP  $sftp      An Sftp instance
      * @param string      $directory The distant directory
      * @param bool        $create    Whether to create the remote directory if it
      *                               does not exist
      */
-    public function __construct(SecLibSFTP $sftp, $directory = null, $create = false)
+    public function __construct(Sec_Lib_Sftp $sftp, $directory = null, $create = false)
     {
-        if (!class_exists(SecLibSFTP::class)) {
+        if (!class_exists(Sec_Lib_Sftp::class)) {
             throw new \LogicException('You need to install package "phpseclib/phpseclib" to use this adapter');
         }
         $this->sftp = $sftp;
         $this->directory = $directory;
         $this->create = $create;
     }
-
     /**
      * {@inheritdoc}
      */
     public function read($key)
     {
-        return $this->sftp->get($this->computePath($key));
+        return $this->sftp->get($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($source_key, $target_key)
     {
         $this->initialize();
-
-        $sourcePath = $this->computePath($sourceKey);
-        $targetPath = $this->computePath($targetKey);
-
-        $this->ensureDirectoryExists(\Gaufrette\Util\Path::dirname($targetPath), true);
-
-        return $this->sftp->rename($sourcePath, $targetPath);
+        $source_path = $this->compute_path($source_key);
+        $target_path = $this->compute_path($target_key);
+        $this->ensure_directory_exists(\Gaufrette\Util\Path::dirname($target_path), true);
+        return $this->sftp->rename($source_path, $target_path);
     }
-
     /**
      * {@inheritdoc}
      */
     public function write($key, $content)
     {
         $this->initialize();
-
-        $path = $this->computePath($key);
-        $this->ensureDirectoryExists(\Gaufrette\Util\Path::dirname($path), true);
+        $path = $this->compute_path($key);
+        $this->ensure_directory_exists(\Gaufrette\Util\Path::dirname($path), true);
         if ($this->sftp->put($path, $content)) {
             return $this->sftp->size($path);
         }
-
         return false;
     }
-
     /**
      * {@inheritdoc}
      */
     public function exists($key): bool
     {
         $this->initialize();
-
-        return false !== $this->sftp->stat($this->computePath($key));
+        return false !== $this->sftp->stat($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      */
-    public function isDirectory($key): bool
+    public function is_directory($key): bool
     {
         $this->initialize();
-
         $pwd = $this->sftp->pwd();
-        if ($this->sftp->chdir($this->computePath($key))) {
+        if ($this->sftp->chdir($this->compute_path($key))) {
             $this->sftp->chdir($pwd);
-
             return true;
         }
-
         return false;
     }
-
     /**
      * {@inheritdoc}
      */
     public function keys()
     {
-        $keys = $this->fetchKeys();
-
+        $keys = $this->fetch_keys();
         return $keys['keys'];
     }
-
     /**
      * {@inheritdoc}
      */
-    public function listKeys($prefix = '')
+    public function list_keys($prefix = '')
     {
         preg_match('/(.*?)[^\/]*$/', $prefix, $match);
         $directory = rtrim($match[1], '/');
-
-        $keys = $this->fetchKeys($directory, false);
-
+        $keys = $this->fetch_keys($directory, false);
         if ($directory === $prefix) {
             return $keys;
         }
-
-        $filteredKeys = [];
+        $filtered_keys = [];
         foreach (['keys', 'dirs'] as $hash) {
-            $filteredKeys[$hash] = [];
+            $filtered_keys[$hash] = [];
             foreach ($keys[$hash] as $key) {
                 if (0 === strpos($key, $prefix)) {
-                    $filteredKeys[$hash][] = $key;
+                    $filtered_keys[$hash][] = $key;
                 }
             }
         }
-
-        return $filteredKeys;
+        return $filtered_keys;
     }
-
     /**
      * {@inheritdoc}
      */
     public function mtime($key)
     {
         $this->initialize();
-
-        $stat = $this->sftp->stat($this->computePath($key));
-
+        $stat = $this->sftp->stat($this->compute_path($key));
         return $stat['mtime'] ?? false;
     }
-
     /**
      * {@inheritdoc}
      */
     public function delete($key)
     {
-        return $this->sftp->delete($this->computePath($key), false);
+        return $this->sftp->delete($this->compute_path($key), false);
     }
-
     /**
      * {@inheritdoc}
      */
-    public function createFile($key, Filesystem $filesystem): \Gaufrette\File
+    public function create_file($key, Filesystem $filesystem): \Gaufrette\File
     {
         $file = new File($key, $filesystem);
-
-        $stat = $this->sftp->stat($this->computePath($key));
+        $stat = $this->sftp->stat($this->compute_path($key));
         if (isset($stat['size'])) {
-            $file->setSize($stat['size']);
+            $file->set_size($stat['size']);
         }
-
         return $file;
     }
-
     /**
      * Performs the adapter's initialization.
      *
@@ -180,44 +148,37 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
         if ($this->initialized) {
             return;
         }
-
-        $this->ensureDirectoryExists($this->directory, $this->create);
-
+        $this->ensure_directory_exists($this->directory, $this->create);
         $this->initialized = true;
     }
-
-    protected function ensureDirectoryExists($directory, $create)
+    protected function ensure_directory_exists($directory, $create)
     {
         $pwd = $this->sftp->pwd();
         if ($this->sftp->chdir($directory)) {
             $this->sftp->chdir($pwd);
         } elseif ($create) {
             if (!$this->sftp->mkdir($directory, 0777, true)) {
-                throw new \RuntimeException(sprintf('The directory \'%s\' does not exist and could not be created (%s).', $this->directory, $this->sftp->getLastSFTPError()));
+                throw new \RuntimeException(sprintf('The directory \'%s\' does not exist and could not be created (%s).', $this->directory, $this->sftp->get_last_sftp_error()));
             }
         } else {
             throw new \RuntimeException(sprintf('The directory \'%s\' does not exist.', $this->directory));
         }
     }
-
-    protected function computePath($key): string
+    protected function compute_path($key): string
     {
         return $this->directory . '/' . ltrim($key, '/');
     }
-
     /**
      * @return mixed[]
      */
-    protected function fetchKeys(string $directory = '', $onlyKeys = true): array
+    protected function fetch_keys(string $directory = '', $only_keys = true): array
     {
         $keys = ['keys' => [], 'dirs' => []];
-        $computedPath = $this->computePath($directory);
-
-        if (!$this->sftp->file_exists($computedPath)) {
+        $computed_path = $this->compute_path($directory);
+        if (!$this->sftp->file_exists($computed_path)) {
             return $keys;
         }
-
-        $list = $this->sftp->rawlist($computedPath);
+        $list = $this->sftp->rawlist($computed_path);
         foreach ((array) $list as $filename => $stat) {
             if ('.' === $filename) {
                 continue;
@@ -232,18 +193,14 @@ class PhpseclibSftp implements Adapter, FileFactory, ListKeysAware
                 $keys['keys'][] = $path;
             }
         }
-
         $dirs = $keys['dirs'];
-
-        if ($onlyKeys && !empty($dirs)) {
+        if ($only_keys && !empty($dirs)) {
             $keys['keys'] = array_merge($keys['keys'], $dirs);
             $keys['dirs'] = [];
         }
-
         foreach ($dirs as $dir) {
-            $keys = array_merge_recursive($keys, $this->fetchKeys($dir, $onlyKeys));
+            $keys = array_merge_recursive($keys, $this->fetch_keys($dir, $only_keys));
         }
-
         return $keys;
     }
 }

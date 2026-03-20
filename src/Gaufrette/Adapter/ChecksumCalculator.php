@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,7 +8,7 @@ namespace Gaufrette\Adapter;
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-interface ChecksumCalculator
+interface Checksum_Calculator
 {
     /**
      * Returns the checksum of the specified key.

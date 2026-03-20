@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Util;
 
 /**
@@ -19,13 +18,12 @@ class Size
      *
      * @todo handle the case the mbstring is not loaded
      */
-    public static function fromContent($content): int
+    public static function from_content($content): int
     {
         // Make sure to get the real length in byte and not
         // accidentally mistake some bytes as a UTF BOM.
         return mb_strlen($content, '8bit');
     }
-
     /**
      * Returns the size in bytes from the given file.
      *
@@ -33,11 +31,10 @@ class Size
      *
      * @return int
      */
-    public static function fromFile($filename)
+    public static function from_file($filename)
     {
         return filesize($filename);
     }
-
     /**
      * Returns the size in bytes from the given resource.
      *
@@ -45,10 +42,10 @@ class Size
      *
      * @return string
      */
-    public static function fromResource($handle)
+    public static function from_resource($handle)
     {
-        $cStat = fstat($handle);
+        $c_stat = fstat($handle);
         // if the resource is a remote file, $cStat will be false
-        return $cStat ? $cStat['size'] : 0;
+        return $c_stat ? $c_stat['size'] : 0;
     }
 }

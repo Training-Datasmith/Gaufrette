@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,7 +8,7 @@ namespace Gaufrette\Adapter;
  *
  * @author Gildas Quemener <gildas.quemener@gmail.com>
  */
-interface MimeTypeProvider
+interface Mime_Type_Provider
 {
     /**
      * Returns the mime type of the specified key.
@@ -18,5 +17,5 @@ interface MimeTypeProvider
      *
      * @return string
      */
-    public function mimeType($key);
+    public function mime_type($key);
 }

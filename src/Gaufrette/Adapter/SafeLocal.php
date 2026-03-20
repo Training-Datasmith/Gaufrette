@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -10,21 +9,20 @@ namespace Gaufrette\Adapter;
  *
  * @author  Antoine Hérault <antoine.herault@gmail.com>
  */
-class SafeLocal extends Local
+class Safe_Local extends Local
 {
     /**
      * {@inheritdoc}
      */
-    public function computeKey($path): string
+    public function compute_key($path): string
     {
-        return base64_decode(parent::computeKey($path));
+        return base64_decode(parent::compute_key($path));
     }
-
     /**
      * {@inheritdoc}
      */
-    protected function computePath($key)
+    protected function compute_path($key)
     {
-        return parent::computePath(base64_encode($key));
+        return parent::compute_path(base64_encode($key));
     }
 }

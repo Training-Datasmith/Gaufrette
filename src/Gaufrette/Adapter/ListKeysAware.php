@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,7 +8,7 @@ namespace Gaufrette\Adapter;
  *
  * @author Andrew Tch <andrew.tchircoff@gmail.com>
  */
-interface ListKeysAware
+interface List_Keys_Aware
 {
     /**
      * Lists keys beginning with pattern given
@@ -19,5 +18,5 @@ interface ListKeysAware
      *
      * @return array
      */
-    public function listKeys($prefix = '');
+    public function list_keys($prefix = '');
 }

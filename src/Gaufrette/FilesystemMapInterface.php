@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
 /**
  * Associates filesystem instances to their names.
  */
-interface FilesystemMapInterface
+interface Filesystem_Map_Interface
 {
     /**
      * Indicates whether there is a filesystem registered for the specified
@@ -18,7 +17,6 @@ interface FilesystemMapInterface
      * @return bool
      */
     public function has($name);
-
     /**
      * Returns the filesystem registered for the specified name.
      *

@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
 /**
@@ -9,10 +8,9 @@ namespace Gaufrette;
  *
  * @author Antoine Hérault <antoine.herault@gmail.com>
  */
-class FilesystemMap implements FilesystemMapInterface
+class Filesystem_Map implements Filesystem_Map_Interface
 {
     private array $filesystems = [];
-
     /**
      * Returns an array of all the registered filesystems where the key is the
      * name and the value the filesystem.
@@ -23,7 +21,6 @@ class FilesystemMap implements FilesystemMapInterface
     {
         return $this->filesystems;
     }
-
     /**
      * Register the given filesystem for the specified name.
      *
@@ -32,18 +29,13 @@ class FilesystemMap implements FilesystemMapInterface
      * @throws \InvalidArgumentException when the specified name contains
      *                                  forbidden characters
      */
-    public function set($name, FilesystemInterface $filesystem): void
+    public function set($name, Filesystem_Interface $filesystem): void
     {
         if (!preg_match('/^[-_a-zA-Z0-9]+$/', $name)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The specified name "%s" is not valid.',
-                $name
-            ));
+            throw new \InvalidArgumentException(sprintf('The specified name "%s" is not valid.', $name));
         }
-
         $this->filesystems[$name] = $filesystem;
     }
-
     /**
      * {@inheritdoc}
      */
@@ -51,22 +43,16 @@ class FilesystemMap implements FilesystemMapInterface
     {
         return isset($this->filesystems[$name]);
     }
-
     /**
      * {@inheritdoc}
      */
     public function get($name)
     {
         if (!$this->has($name)) {
-            throw new \InvalidArgumentException(sprintf(
-                'There is no filesystem defined having "%s" name.',
-                $name
-            ));
+            throw new \InvalidArgumentException(sprintf('There is no filesystem defined having "%s" name.', $name));
         }
-
         return $this->filesystems[$name];
     }
-
     /**
      * Removes the filesystem registered for the specified name.
      *
@@ -75,15 +61,10 @@ class FilesystemMap implements FilesystemMapInterface
     public function remove($name): void
     {
         if (!$this->has($name)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Cannot remove the "%s" filesystem as it is not defined.',
-                $name
-            ));
+            throw new \InvalidArgumentException(sprintf('Cannot remove the "%s" filesystem as it is not defined.', $name));
         }
-
         unset($this->filesystems[$name]);
     }
-
     /**
      * Clears all the registered filesystems.
      */

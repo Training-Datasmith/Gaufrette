@@ -1,13 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
 use Gaufrette\Util;
-use ZipArchive;
-
+use Zip_Archive;
 /**
  * ZIP Archive adapter.
  *
@@ -19,59 +17,49 @@ class Zip implements Adapter
     /**
      * @var string The zip archive full path
      */
-    protected $zipFile;
-
+    protected $zip_file;
     /**
      * @var ZipArchive
      */
-    protected $zipArchive;
-
-    public function __construct($zipFile)
+    protected $zip_archive;
+    public function __construct($zip_file)
     {
         if (!extension_loaded('zip')) {
             throw new \RuntimeException(sprintf('Unable to use %s as the ZIP extension is not available.', self::class));
         }
-
-        $this->zipFile = $zipFile;
-        $this->reinitZipArchive();
+        $this->zip_file = $zip_file;
+        $this->reinit_zip_archive();
     }
-
     /**
      * {@inheritdoc}
      */
     public function read($key)
     {
-        if (false === ($content = $this->zipArchive->getFromName($key, 0))) {
+        if (false === $content = $this->zip_archive->get_from_name($key, 0)) {
             return false;
         }
-
         return $content;
     }
-
     /**
      * {@inheritdoc}
      */
     public function write($key, $content)
     {
-        if (!$this->zipArchive->addFromString($key, $content)) {
+        if (!$this->zip_archive->add_from_string($key, $content)) {
             return false;
         }
-
         if (!$this->save()) {
             return false;
         }
-
-        return Util\Size::fromContent($content);
+        return Util\Size::from_content($content);
     }
-
     /**
      * {@inheritdoc}
      */
     public function exists($key): bool
     {
-        return (bool) $this->getStat($key);
+        return (bool) $this->get_stat($key);
     }
-
     /**
      * {@inheritdoc}
      * @return mixed[]
@@ -79,58 +67,48 @@ class Zip implements Adapter
     public function keys(): array
     {
         $keys = [];
-
-        for ($i = 0; $i < $this->zipArchive->numFiles; ++$i) {
-            $keys[$i] = $this->zipArchive->getNameIndex($i);
+        for ($i = 0; $i < $this->zip_archive->num_files; ++$i) {
+            $keys[$i] = $this->zip_archive->get_name_index($i);
         }
-
         return $keys;
     }
-
     /**
      * @todo implement
      *
      * {@inheritdoc}
      */
-    public function isDirectory($key): bool
+    public function is_directory($key): bool
     {
         return false;
     }
-
     /**
      * {@inheritdoc}
      */
     public function mtime($key)
     {
-        $stat = $this->getStat($key);
-
+        $stat = $this->get_stat($key);
         return $stat['mtime'] ?? false;
     }
-
     /**
      * {@inheritdoc}
      */
     public function delete($key)
     {
-        if (!$this->zipArchive->deleteName($key)) {
+        if (!$this->zip_archive->delete_name($key)) {
             return false;
         }
-
         return $this->save();
     }
-
     /**
      * {@inheritdoc}
      */
-    public function rename($sourceKey, $targetKey)
+    public function rename($source_key, $target_key)
     {
-        if (!$this->zipArchive->renameName($sourceKey, $targetKey)) {
+        if (!$this->zip_archive->rename_name($source_key, $target_key)) {
             return false;
         }
-
         return $this->save();
     }
-
     /**
      * Returns the stat of a file in the zip archive
      *  (name, index, crc, mtime, compression size, compression method, filesize).
@@ -139,78 +117,62 @@ class Zip implements Adapter
      *
      * @return array|bool
      */
-    public function getStat($key)
+    public function get_stat($key)
     {
-        $stat = $this->zipArchive->statName($key);
+        $stat = $this->zip_archive->stat_name($key);
         if (false === $stat) {
             return [];
         }
-
         return $stat;
     }
-
     public function __destruct()
     {
-        if ($this->zipArchive) {
+        if ($this->zip_archive) {
             try {
-                $this->zipArchive->close();
+                $this->zip_archive->close();
             } catch (\Exception $e) {
             }
-            unset($this->zipArchive);
+            unset($this->zip_archive);
         }
     }
-
-    protected function reinitZipArchive(): self
+    protected function reinit_zip_archive(): self
     {
-        $this->zipArchive = new ZipArchive();
-
-        if (true !== ($resultCode = $this->zipArchive->open($this->zipFile, ZipArchive::CREATE))) {
-            switch ($resultCode) {
-                case ZipArchive::ER_EXISTS:
-                    $errMsg = 'File already exists.';
-
+        $this->zip_archive = new Zip_Archive();
+        if (true !== $result_code = $this->zip_archive->open($this->zip_file, Zip_Archive::CREATE)) {
+            switch ($result_code) {
+                case Zip_Archive::ER_EXISTS:
+                    $err_msg = 'File already exists.';
                     break;
-                case ZipArchive::ER_INCONS:
-                    $errMsg = 'Zip archive inconsistent.';
-
+                case Zip_Archive::ER_INCONS:
+                    $err_msg = 'Zip archive inconsistent.';
                     break;
-                case ZipArchive::ER_INVAL:
-                case ZipArchive::ER_NOENT:
-                    $errMsg = 'Invalid argument.';
-
+                case Zip_Archive::ER_INVAL:
+                case Zip_Archive::ER_NOENT:
+                    $err_msg = 'Invalid argument.';
                     break;
-                case ZipArchive::ER_MEMORY:
-                    $errMsg = 'Malloc failure.';
-
+                case Zip_Archive::ER_MEMORY:
+                    $err_msg = 'Malloc failure.';
                     break;
-                case ZipArchive::ER_NOZIP:
-                    $errMsg = 'Not a zip archive.';
-
+                case Zip_Archive::ER_NOZIP:
+                    $err_msg = 'Not a zip archive.';
                     break;
-                case ZipArchive::ER_OPEN:
-                    $errMsg = 'Can\'t open file.';
-
+                case Zip_Archive::ER_OPEN:
+                    $err_msg = 'Can\'t open file.';
                     break;
-                case ZipArchive::ER_READ:
-                    $errMsg = 'Read error.';
-
+                case Zip_Archive::ER_READ:
+                    $err_msg = 'Read error.';
                     break;
-                case ZipArchive::ER_SEEK:
-                    $errMsg = 'Seek error.';
-
+                case Zip_Archive::ER_SEEK:
+                    $err_msg = 'Seek error.';
                     break;
                 default:
-                    $errMsg = 'Unknown error.';
-
+                    $err_msg = 'Unknown error.';
                     break;
             }
-
-            throw new \RuntimeException(sprintf('%s', $errMsg));
+            throw new \RuntimeException(sprintf('%s', $err_msg));
         }
-
         return $this;
     }
-
     /**
      * Saves archive modifications and updates current ZipArchive instance.
      *
@@ -219,13 +181,11 @@ class Zip implements Adapter
     protected function save(): bool
     {
         // Close to save modification
-        if (!$this->zipArchive->close()) {
+        if (!$this->zip_archive->close()) {
             return false;
         }
-
         // Re-initialize to get updated version
-        $this->reinitZipArchive();
-
+        $this->reinit_zip_archive();
         return true;
     }
 }

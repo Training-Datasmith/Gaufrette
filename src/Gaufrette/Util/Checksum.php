@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Util;
 
 /**
@@ -16,11 +15,10 @@ class Checksum
      *
      * @param string $content
      */
-    public static function fromContent($content): string
+    public static function from_content($content): string
     {
         return md5($content);
     }
-
     /**
      * Returns the checksum of the specified file.
      *
@@ -28,7 +26,7 @@ class Checksum
      *
      * @return string
      */
-    public static function fromFile($filename)
+    public static function from_file($filename)
     {
         return md5_file($filename);
     }

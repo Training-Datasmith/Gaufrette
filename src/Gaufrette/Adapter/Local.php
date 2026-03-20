@@ -1,25 +1,22 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 use Gaufrette\Adapter;
 use Gaufrette\Stream;
 use Gaufrette\Util;
-
 /**
  * Adapter for the local filesystem.
  *
  * @author Antoine Hérault <antoine.herault@gmail.com>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculator, MimeTypeProvider
+class Local implements Adapter, Stream_Factory, Checksum_Calculator, Size_Calculator, Mime_Type_Provider
 {
     protected $directory;
     private $create;
     private $mode;
-
     /**
      * @param string $directory Directory where the filesystem is located
      * @param bool   $create    Whether to create the directory if it does not
@@ -32,15 +29,12 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
     public function __construct($directory, $create = false, $mode = 0777)
     {
         $this->directory = Util\Path::normalize($directory);
-
         if (is_link($this->directory)) {
             $this->directory = realpath($this->directory);
         }
-
         $this->create = $create;
         $this->mode = $mode;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -50,13 +44,11 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function read($key)
     {
-        if ($this->isDirectory($key)) {
+        if ($this->is_directory($key)) {
             return false;
         }
-
-        return file_get_contents($this->computePath($key));
+        return file_get_contents($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -66,12 +58,10 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function write($key, $content)
     {
-        $path = $this->computePath($key);
-        $this->ensureDirectoryExists(\Gaufrette\Util\Path::dirname($path), true);
-
+        $path = $this->compute_path($key);
+        $this->ensure_directory_exists(\Gaufrette\Util\Path::dirname($path), true);
         return file_put_contents($path, $content);
     }
-
     /**
      * {@inheritdoc}
      *
@@ -79,22 +69,19 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function rename($sourceKey, $targetKey): bool
+    public function rename($source_key, $target_key): bool
     {
-        $targetPath = $this->computePath($targetKey);
-        $this->ensureDirectoryExists(\Gaufrette\Util\Path::dirname($targetPath), true);
-
-        return rename($this->computePath($sourceKey), $targetPath);
+        $target_path = $this->compute_path($target_key);
+        $this->ensure_directory_exists(\Gaufrette\Util\Path::dirname($target_path), true);
+        return rename($this->compute_path($source_key), $target_path);
     }
-
     /**
      * {@inheritdoc}
      */
     public function exists($key): bool
     {
-        return is_file($this->computePath($key));
+        return is_file($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -105,29 +92,19 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function keys(): array
     {
-        $this->ensureDirectoryExists($this->directory, $this->create);
-
+        $this->ensure_directory_exists($this->directory, $this->create);
         try {
-            $files = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator(
-                    $this->directory,
-                    \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS
-                ),
-                \RecursiveIteratorIterator::CHILD_FIRST
-            );
+            $files = new \Recursive_Iterator_Iterator(new \Recursive_Directory_Iterator($this->directory, \Filesystem_Iterator::SKIP_DOTS | \Filesystem_Iterator::UNIX_PATHS), \Recursive_Iterator_Iterator::CHILD_FIRST);
         } catch (\Exception $e) {
-            $files = new \EmptyIterator();
+            $files = new \Empty_Iterator();
         }
-
         $keys = [];
         foreach ($files as $file) {
-            $keys[] = $this->computeKey($file);
+            $keys[] = $this->compute_key($file);
         }
         sort($keys);
-
         return $keys;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -137,9 +114,8 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function mtime($key)
     {
-        return filemtime($this->computePath($key));
+        return filemtime($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -148,16 +124,14 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function delete($key)
     {
-        if ($this->isDirectory($key)) {
-            return $this->deleteDirectory($this->computePath($key));
+        if ($this->is_directory($key)) {
+            return $this->delete_directory($this->compute_path($key));
         }
         if ($this->exists($key)) {
-            return unlink($this->computePath($key));
+            return unlink($this->compute_path($key));
         }
-
         return false;
     }
-
     /**
      * @param string $key
      *
@@ -166,11 +140,10 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function isDirectory($key): bool
+    public function is_directory($key): bool
     {
-        return is_dir($this->computePath($key));
+        return is_dir($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -178,11 +151,10 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function createStream($key): \Gaufrette\Stream\Local
+    public function create_stream($key): \Gaufrette\Stream\Local
     {
-        return new Stream\Local($this->computePath($key), $this->mode);
+        return new Stream\Local($this->compute_path($key), $this->mode);
     }
-
     /**
      * {@inheritdoc}
      *
@@ -192,9 +164,8 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function checksum($key)
     {
-        return Util\Checksum::fromFile($this->computePath($key));
+        return Util\Checksum::from_file($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -204,9 +175,8 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      */
     public function size($key)
     {
-        return Util\Size::fromFile($this->computePath($key));
+        return Util\Size::from_file($this->compute_path($key));
     }
-
     /**
      * {@inheritdoc}
      *
@@ -214,13 +184,11 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function mimeType($key)
+    public function mime_type($key)
     {
-        $fileInfo = new \finfo(FILEINFO_MIME_TYPE);
-
-        return $fileInfo->file($this->computePath($key));
+        $file_info = new \finfo(FILEINFO_MIME_TYPE);
+        return $file_info->file($this->compute_path($key));
     }
-
     /**
      * Computes the key from the specified path.
      *
@@ -230,13 +198,11 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    public function computeKey($path): string
+    public function compute_key($path): string
     {
-        $path = $this->normalizePath($path);
-
+        $path = $this->normalize_path($path);
         return ltrim(substr($path, strlen($this->directory)), '/');
     }
-
     /**
      * Computes the path from the specified key.
      *
@@ -248,13 +214,11 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \OutOfBoundsException     If the computed path is out of the directory
      * @throws \RuntimeException         If directory does not exists and cannot be created
      */
-    protected function computePath(string $key)
+    protected function compute_path(string $key)
     {
-        $this->ensureDirectoryExists($this->directory, $this->create);
-
-        return $this->normalizePath($this->directory . '/' . $key);
+        $this->ensure_directory_exists($this->directory, $this->create);
+        return $this->normalize_path($this->directory . '/' . $key);
     }
-
     /**
      * Normalizes the given path.
      *
@@ -264,17 +228,14 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \OutOfBoundsException If the computed path is out of the
      *                              directory
      */
-    protected function normalizePath($path)
+    protected function normalize_path($path)
     {
         $path = Util\Path::normalize($path);
-
         if (0 !== strpos($path, (string) $this->directory)) {
             throw new \OutOfBoundsException(sprintf('The path "%s" is out of the filesystem.', $path));
         }
-
         return $path;
     }
-
     /**
      * Ensures the specified directory exists, creates it if it does not.
      *
@@ -286,17 +247,15 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \RuntimeException if the directory does not exists and could not
      *                          be created
      */
-    protected function ensureDirectoryExists($directory, $create = false)
+    protected function ensure_directory_exists($directory, $create = false)
     {
         if (!is_dir($directory)) {
             if (!$create) {
                 throw new \RuntimeException(sprintf('The directory "%s" does not exist.', $directory));
             }
-
-            $this->createDirectory($directory);
+            $this->create_directory($directory);
         }
     }
-
     /**
      * Creates the specified directory and its parents.
      *
@@ -305,13 +264,12 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      * @throws \InvalidArgumentException if the directory already exists
      * @throws \RuntimeException         if the directory could not be created
      */
-    protected function createDirectory($directory)
+    protected function create_directory($directory)
     {
         if (!@mkdir($directory, $this->mode, true) && !is_dir($directory)) {
             throw new \RuntimeException(sprintf('The directory \'%s\' could not be created.', $directory));
         }
     }
-
     /**
      * @param string The directory's path to delete
      *
@@ -320,36 +278,23 @@ class Local implements Adapter, StreamFactory, ChecksumCalculator, SizeCalculato
      *
      * @return bool Wheter the operation succeeded or not
      */
-    private function deleteDirectory($directory)
+    private function delete_directory($directory)
     {
         if ($this->directory === $directory) {
-            throw new \InvalidArgumentException(
-                sprintf('Impossible to delete the root directory of this Local adapter ("%s").', $directory)
-            );
+            throw new \InvalidArgumentException(sprintf('Impossible to delete the root directory of this Local adapter ("%s").', $directory));
         }
-
         $status = true;
-
         if (file_exists($directory)) {
-            $iterator = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator(
-                    $directory,
-                    \FilesystemIterator::SKIP_DOTS | \FilesystemIterator::UNIX_PATHS
-                ),
-                \RecursiveIteratorIterator::CHILD_FIRST
-            );
-
+            $iterator = new \Recursive_Iterator_Iterator(new \Recursive_Directory_Iterator($directory, \Filesystem_Iterator::SKIP_DOTS | \Filesystem_Iterator::UNIX_PATHS), \Recursive_Iterator_Iterator::CHILD_FIRST);
             foreach ($iterator as $item) {
-                if ($item->isDir()) {
+                if ($item->is_dir()) {
                     $status = $status && rmdir(strval($item));
                 } else {
                     $status = $status && unlink(strval($item));
                 }
             }
-
             $status = $status && rmdir($directory);
         }
-
         return $status;
     }
 }

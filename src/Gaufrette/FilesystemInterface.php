@@ -1,10 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
-interface FilesystemInterface
+interface Filesystem_Interface
 {
     /**
      * Indicates whether the file matching the specified key exists.
@@ -16,7 +15,6 @@ interface FilesystemInterface
      * @throws \InvalidArgumentException If $key is invalid
      */
     public function has($key);
-
     /**
      * Renames a file.
      *
@@ -34,8 +32,7 @@ interface FilesystemInterface
      *
      * @see File::rename()
      */
-    public function rename($sourceKey, $targetKey);
-
+    public function rename($source_key, $target_key);
     /**
      * Returns the file matching the specified key.
      *
@@ -48,7 +45,6 @@ interface FilesystemInterface
      * @return File
      */
     public function get($key, $create = false);
-
     /**
      * Writes the given content into the file.
      *
@@ -63,7 +59,6 @@ interface FilesystemInterface
      * @return int The number of bytes that were written into the file
      */
     public function write($key, $content, $overwrite = false);
-
     /**
      * Reads the content from the file.
      *
@@ -76,7 +71,6 @@ interface FilesystemInterface
      * @return string
      */
     public function read($key);
-
     /**
      * Deletes the file matching the specified key.
      *
@@ -88,14 +82,12 @@ interface FilesystemInterface
      * @return bool
      */
     public function delete($key);
-
     /**
      * Returns an array of all keys.
      *
      * @return array
      */
     public function keys();
-
     /**
      * Lists keys beginning with given prefix
      * (no wildcard / regex matching).
@@ -107,8 +99,7 @@ interface FilesystemInterface
      *
      * @return array
      */
-    public function listKeys($prefix = '');
-
+    public function list_keys($prefix = '');
     /**
      * Returns the last modified time of the specified file.
      *
@@ -119,7 +110,6 @@ interface FilesystemInterface
      * @throws \InvalidArgumentException If $key is invalid
      */
     public function mtime($key);
-
     /**
      * Returns the checksum of the specified file's content.
      *
@@ -130,7 +120,6 @@ interface FilesystemInterface
      * @throws \InvalidArgumentException If $key is invalid
      */
     public function checksum($key);
-
     /**
      * Returns the size of the specified file's content.
      *
@@ -141,7 +130,6 @@ interface FilesystemInterface
      * @throws \InvalidArgumentException If $key is invalid
      */
     public function size($key);
-
     /**
      * Gets a new stream instance of the specified file.
      *
@@ -151,8 +139,7 @@ interface FilesystemInterface
      *
      * @throws \InvalidArgumentException If $key is invalid
      */
-    public function createStream($key);
-
+    public function create_stream($key);
     /**
      * Creates a new file in a filesystem.
      *
@@ -162,8 +149,7 @@ interface FilesystemInterface
      *
      * @throws \InvalidArgumentException If $key is invalid
      */
-    public function createFile($key);
-
+    public function create_file($key);
     /**
      * Get the mime type of the provided key.
      *
@@ -173,12 +159,11 @@ interface FilesystemInterface
      *
      * @throws \InvalidArgumentException If $key is invalid
      */
-    public function mimeType($key);
-
+    public function mime_type($key);
     /**
      * @param string $key
      *
      * @return bool
      */
-    public function isDirectory($key);
+    public function is_directory($key);
 }

@@ -1,18 +1,16 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 use Gaufrette\File;
 use Gaufrette\Filesystem;
-
 /**
  * Interface for the file creation class.
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-interface FileFactory
+interface File_Factory
 {
     /**
      * Creates a new File instance and returns it.
@@ -21,5 +19,5 @@ interface FileFactory
      *
      * @return File
      */
-    public function createFile($key, Filesystem $filesystem);
+    public function create_file($key, Filesystem $filesystem);
 }

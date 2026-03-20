@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,7 +8,7 @@ namespace Gaufrette\Adapter;
  *
  * @author Markus Poerschke <markus@eluceo.de>
  */
-interface SizeCalculator
+interface Size_Calculator
 {
     /**
      * Returns the size of the specified key.

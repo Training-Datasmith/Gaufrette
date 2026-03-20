@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
 /**
@@ -20,7 +19,6 @@ interface Adapter
      * @return string|bool if cannot read content
      */
     public function read($key);
-
     /**
      * Writes the given content into the file.
      *
@@ -30,7 +28,6 @@ interface Adapter
      * @return int|bool The number of bytes that were written into the file
      */
     public function write($key, $content);
-
     /**
      * Indicates whether the file exists.
      *
@@ -39,14 +36,12 @@ interface Adapter
      * @return bool
      */
     public function exists($key);
-
     /**
      * Returns an array of all keys (files and directories).
      *
      * @return array
      */
     public function keys();
-
     /**
      * Returns the last modified time.
      *
@@ -55,7 +50,6 @@ interface Adapter
      * @return int|bool An UNIX like timestamp or false
      */
     public function mtime($key);
-
     /**
      * Deletes the file.
      *
@@ -64,7 +58,6 @@ interface Adapter
      * @return bool
      */
     public function delete($key);
-
     /**
      * Renames a file.
      *
@@ -73,8 +66,7 @@ interface Adapter
      *
      * @return bool
      */
-    public function rename($sourceKey, $targetKey);
-
+    public function rename($source_key, $target_key);
     /**
      * Check if key is directory.
      *
@@ -82,5 +74,5 @@ interface Adapter
      *
      * @return bool
      */
-    public function isDirectory($key);
+    public function is_directory($key);
 }

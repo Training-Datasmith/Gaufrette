@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
-use Gaufrette\Adapter\MetadataSupporter;
-use Gaufrette\Exception\FileNotFound;
-
+use Gaufrette\Adapter\Metadata_Supporter;
+use Gaufrette\Exception\File_Not_Found;
 /**
  * Points to a file in a filesystem.
  *
@@ -15,61 +13,53 @@ use Gaufrette\Exception\FileNotFound;
 class File
 {
     protected $key;
-    protected \Gaufrette\FilesystemInterface $filesystem;
-
+    protected \Gaufrette\Filesystem_Interface $filesystem;
     /**
      * Content variable is lazy. It will not be read from filesystem until it's requested first time.
      *
      * @var mixed content
      */
     protected $content;
-
     /**
      * @var array metadata in associative array. Only for adapters that support metadata
      */
     protected $metadata;
-
     /**
      * Human readable filename (usually the end of the key).
      *
      * @var string name
      */
     protected $name;
-
     /**
      * File size in bytes.
      *
      * @var int size
      */
     protected $size = 0;
-
     /**
      * File date modified.
      *
      * @var int mtime
      */
     protected $mtime;
-
     /**
      * @param string     $key
      */
-    public function __construct($key, FilesystemInterface $filesystem)
+    public function __construct($key, Filesystem_Interface $filesystem)
     {
         $this->key = $key;
         $this->name = $key;
         $this->filesystem = $filesystem;
     }
-
     /**
      * Returns the key.
      *
      * @return string
      */
-    public function getKey()
+    public function get_key()
     {
         return $this->key;
     }
-
     /**
      * Returns the content.
      *
@@ -79,59 +69,51 @@ class File
      *
      * @return string
      */
-    public function getContent(array $metadata = [])
+    public function get_content(array $metadata = [])
     {
         if (isset($this->content)) {
             return $this->content;
         }
-        $this->setMetadata($metadata);
-
+        $this->set_metadata($metadata);
         return $this->content = $this->filesystem->read($this->key);
     }
-
     /**
      * @return string name of the file
      */
-    public function getName()
+    public function get_name()
     {
         return $this->name;
     }
-
     /**
      * @return int size of the file
      */
-    public function getSize()
+    public function get_size()
     {
         if ($this->size) {
             return $this->size;
         }
-
         try {
-            return $this->size = $this->filesystem->size($this->getKey());
-        } catch (FileNotFound $exception) {
+            return $this->size = $this->filesystem->size($this->get_key());
+        } catch (File_Not_Found $exception) {
         }
-
         return 0;
     }
-
     /**
      * Returns the file modified time.
      *
      * @return int
      */
-    public function getMtime()
+    public function get_mtime()
     {
         return $this->mtime = $this->filesystem->mtime($this->key);
     }
-
     /**
      * @param int $size size of the file
      */
-    public function setSize($size): void
+    public function set_size($size): void
     {
         $this->size = $size;
     }
-
     /**
      * Sets the content.
      *
@@ -141,22 +123,19 @@ class File
      * @return int The number of bytes that were written into the file, or
      *             FALSE on failure
      */
-    public function setContent($content, array $metadata = [])
+    public function set_content($content, array $metadata = [])
     {
         $this->content = $content;
-        $this->setMetadata($metadata);
-
+        $this->set_metadata($metadata);
         return $this->size = $this->filesystem->write($this->key, $this->content, true);
     }
-
     /**
      * @param string $name name of the file
      */
-    public function setName($name): void
+    public function set_name($name): void
     {
         $this->name = $name;
     }
-
     /**
      * Indicates whether the file exists in the filesystem.
      *
@@ -166,7 +145,6 @@ class File
     {
         return $this->filesystem->has($this->key);
     }
-
     /**
      * Deletes the file from the filesystem.
      *
@@ -179,51 +157,43 @@ class File
      */
     public function delete(array $metadata = [])
     {
-        $this->setMetadata($metadata);
-
+        $this->set_metadata($metadata);
         return $this->filesystem->delete($this->key);
     }
-
     /**
      * Creates a new file stream instance of the file.
      *
      * @return Stream
      */
-    public function createStream()
+    public function create_stream()
     {
-        return $this->filesystem->createStream($this->key);
+        return $this->filesystem->create_stream($this->key);
     }
-
     /**
      * Rename the file and move it to its new location.
      *
      * @param string $newKey
      */
-    public function rename($newKey): void
+    public function rename($new_key): void
     {
-        $this->filesystem->rename($this->key, $newKey);
-
-        $this->key = $newKey;
+        $this->filesystem->rename($this->key, $new_key);
+        $this->key = $new_key;
     }
-
     /**
      * Sets the metadata array to be stored in adapters that can support it.
      *
      *
      */
-    protected function setMetadata(array $metadata): bool
+    protected function set_metadata(array $metadata): bool
     {
-        if ($metadata && $this->supportsMetadata()) {
-            $this->filesystem->getAdapter()->setMetadata($this->key, $metadata);
-
+        if ($metadata && $this->supports_metadata()) {
+            $this->filesystem->get_adapter()->set_metadata($this->key, $metadata);
             return true;
         }
-
         return false;
     }
-
-    private function supportsMetadata(): bool
+    private function supports_metadata(): bool
     {
-        return $this->filesystem->getAdapter() instanceof MetadataSupporter;
+        return $this->filesystem->get_adapter() instanceof Metadata_Supporter;
     }
 }

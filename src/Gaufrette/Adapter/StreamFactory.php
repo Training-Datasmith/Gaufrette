@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette\Adapter;
 
 /**
@@ -9,7 +8,7 @@ namespace Gaufrette\Adapter;
  *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-interface StreamFactory
+interface Stream_Factory
 {
     /**
      * Creates a new stream instance of the specified file.
@@ -18,5 +17,5 @@ interface StreamFactory
      *
      * @return \Gaufrette\Stream
      */
-    public function createStream($key);
+    public function create_stream($key);
 }

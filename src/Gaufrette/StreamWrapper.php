@@ -1,7 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 namespace Gaufrette;
 
 /**
@@ -10,34 +9,29 @@ namespace Gaufrette;
  * @author Antoine Hérault <antoine.herault@gmail.com>
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class StreamWrapper
+class Stream_Wrapper
 {
-    private static $filesystemMap;
-
+    private static $filesystem_map;
     private $stream;
-
     /**
      * Defines the filesystem map.
      */
-    public static function setFilesystemMap(FilesystemMap $map): void
+    public static function set_filesystem_map(Filesystem_Map $map): void
     {
-        self::$filesystemMap = $map;
+        self::$filesystem_map = $map;
     }
-
     /**
      * Returns the filesystem map.
      *
      * @return FilesystemMap $map
      */
-    public static function getFilesystemMap()
+    public static function get_filesystem_map()
     {
-        if (null === self::$filesystemMap) {
-            self::$filesystemMap = self::createFilesystemMap();
+        if (null === self::$filesystem_map) {
+            self::$filesystem_map = self::create_filesystem_map();
         }
-
-        return self::$filesystemMap;
+        return self::$filesystem_map;
     }
-
     /**
      * Registers the stream wrapper to handle the specified scheme.
      *
@@ -45,48 +39,37 @@ class StreamWrapper
      */
     public static function register($scheme = 'gaufrette'): void
     {
-        self::streamWrapperUnregister($scheme);
-
-        if (!self::streamWrapperRegister($scheme, self::class)) {
-            throw new \RuntimeException(sprintf(
-                'Could not register stream wrapper class %s for scheme %s.',
-                self::class,
-                $scheme
-            ));
+        self::stream_wrapper_unregister($scheme);
+        if (!self::stream_wrapper_register($scheme, self::class)) {
+            throw new \RuntimeException(sprintf('Could not register stream wrapper class %s for scheme %s.', self::class, $scheme));
         }
     }
-
-    protected static function createFilesystemMap(): \Gaufrette\FilesystemMap
+    protected static function create_filesystem_map(): \Gaufrette\Filesystem_Map
     {
-        return new FilesystemMap();
+        return new Filesystem_Map();
     }
-
     /**
      * @param string $scheme - protocol scheme
      */
-    protected static function streamWrapperUnregister($scheme)
+    protected static function stream_wrapper_unregister($scheme)
     {
         if (in_array($scheme, stream_get_wrappers())) {
             return stream_wrapper_unregister($scheme);
         }
     }
-
     /**
      * @param string $scheme    - protocol scheme
      * @param string $className
      */
-    protected static function streamWrapperRegister($scheme, $className): bool
+    protected static function stream_wrapper_register($scheme, $class_name): bool
     {
-        return stream_wrapper_register($scheme, $className);
+        return stream_wrapper_register($scheme, $class_name);
     }
-
     public function stream_open($path, $mode)
     {
-        $this->stream = $this->createStream($path);
-
-        return $this->stream->open($this->createStreamMode($mode));
+        $this->stream = $this->create_stream($path);
+        return $this->stream->open($this->create_stream_mode($mode));
     }
-
     /**
      * @param int $bytes
      *
@@ -97,10 +80,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->read($bytes);
         }
-
         return false;
     }
-
     /**
      * @param string $data
      *
@@ -111,17 +92,14 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->write($data);
         }
-
         return 0;
     }
-
     public function stream_close(): void
     {
         if ($this->stream) {
             $this->stream->close();
         }
     }
-
     /**
      * @return bool
      */
@@ -130,10 +108,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->flush();
         }
-
         return false;
     }
-
     /**
      * @param int $offset
      * @param int $whence - one of values [SEEK_SET, SEEK_CUR, SEEK_END]
@@ -145,10 +121,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->seek($offset, $whence);
         }
-
         return false;
     }
-
     /**
      * @return mixed
      */
@@ -157,10 +131,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->tell();
         }
-
         return false;
     }
-
     /**
      * @return bool
      */
@@ -169,10 +141,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->eof();
         }
-
         return true;
     }
-
     /**
      * @return mixed
      */
@@ -181,10 +151,8 @@ class StreamWrapper
         if ($this->stream) {
             return $this->stream->stat();
         }
-
         return false;
     }
-
     /**
      * @param string $path
      * @param int    $flags
@@ -195,16 +163,13 @@ class StreamWrapper
      */
     public function url_stat($path, $flags)
     {
-        $stream = $this->createStream($path);
-
+        $stream = $this->create_stream($path);
         try {
-            $stream->open($this->createStreamMode('r+'));
+            $stream->open($this->create_stream_mode('r+'));
         } catch (\RuntimeException $e) {
         }
-
         return $stream->stat();
     }
-
     /**
      * @param string $path
      *
@@ -212,65 +177,42 @@ class StreamWrapper
      */
     public function unlink($path)
     {
-        $stream = $this->createStream($path);
-
+        $stream = $this->create_stream($path);
         try {
-            $stream->open($this->createStreamMode('w+'));
+            $stream->open($this->create_stream_mode('w+'));
         } catch (\RuntimeException $e) {
             return false;
         }
-
         return $stream->unlink();
     }
-
     /**
      * @return mixed
      */
-    public function stream_cast($castAs)
+    public function stream_cast($cast_as)
     {
         if ($this->stream) {
-            return $this->stream->cast($castAs);
+            return $this->stream->cast($cast_as);
         }
-
         return false;
     }
-
-    protected function createStream($path)
+    protected function create_stream($path)
     {
-        $parts = array_merge(
-            [
-                'scheme' => null,
-                'host' => null,
-                'path' => null,
-                'query' => null,
-                'fragment' => null,
-            ],
-            parse_url($path) ?: []
-        );
-
+        $parts = array_merge(['scheme' => null, 'host' => null, 'path' => null, 'query' => null, 'fragment' => null], parse_url($path) ?: []);
         $domain = $parts['host'];
         $key = !empty($parts['path']) ? substr($parts['path'], 1) : '';
-
         if (null !== $parts['query']) {
             $key .= '?' . $parts['query'];
         }
-
         if (null !== $parts['fragment']) {
             $key .= '#' . $parts['fragment'];
         }
-
         if (empty($domain) || empty($key)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The specified path (%s) is invalid.',
-                $path
-            ));
+            throw new \InvalidArgumentException(sprintf('The specified path (%s) is invalid.', $path));
         }
-
-        return self::getFilesystemMap()->get($domain)->createStream($key);
+        return self::get_filesystem_map()->get($domain)->create_stream($key);
     }
-
-    protected function createStreamMode($mode): \Gaufrette\StreamMode
+    protected function create_stream_mode($mode): \Gaufrette\Stream_Mode
     {
-        return new StreamMode($mode);
+        return new Stream_Mode($mode);
     }
 }
