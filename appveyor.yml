@@ -32,7 +32,7 @@ services:
   - mongodb
 
 init:
-  - SET PATH=C:\Program Files\OpenSSL;c:\php;%PATH%
+  - SET PATH=C:\Program Files\Open_SSL;c:\php;%PATH%
   - SET PHP=1
 
 install:
