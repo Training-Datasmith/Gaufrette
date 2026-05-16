@@ -89,7 +89,7 @@ class InMemory implements Adapter, MimeTypeProvider
     /**
      * {@inheritdoc}
      */
-    public function write($key, $content, array $metadata = null)
+    public function write($key, $content, ?array $metadata = null)
     {
         $this->files[$key]['content'] = $content;
         $this->files[$key]['mtime'] = time();
