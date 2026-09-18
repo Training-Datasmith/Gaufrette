@@ -18,6 +18,10 @@ class Path
      */
     public static function normalize($path): string
     {
+        if (!\is_string($path)) {
+            $path = $path instanceof \SplFileInfo ? $path->getPathname() : (string) $path;
+        }
+
         $path = str_replace('\\', '/', $path);
         $prefix = static::getAbsolutePrefix($path);
         $path = substr($path, strlen($prefix));

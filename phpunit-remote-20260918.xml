@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Gaufrette Test Suite" tests="207" assertions="170" errors="0" warnings="0" failures="0" skipped="129" time="0.023292">
+    <testsuite name="Gaufrette\Functional\Adapter\AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" tests="20" assertions="0" errors="0" warnings="0" failures="0" skipped="20" time="0.001230">
+      <testcase name="shouldThrowExceptionIfBucketMissingAndNotCreating" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="66" assertions="0" time="0.000946">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteObjects" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="76" assertions="0" time="0.000028">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckForObjectExistence" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="84" assertions="0" time="0.000026">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckForObjectExistenceWithDirectory" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="93" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldListKeysWithoutDirectory" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="104" assertions="0" time="0.000024">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldListKeysWithDirectory" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="114" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetKeysWithoutDirectory" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="125" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetKeysWithDirectory" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="134" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUploadWithGivenContentType" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="144" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="68" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="81" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="93" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="108" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="119" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="130" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="150" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="165" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="185" assertions="0" time="0.000008">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="198" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\AsyncAwsS3Test" classname="Gaufrette.Functional.Adapter.AsyncAwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AsyncAwsS3Test.php" line="210" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" tests="20" assertions="0" errors="0" warnings="0" failures="0" skipped="20" time="0.000258">
+      <testcase name="shouldThrowExceptionIfBucketMissingAndNotCreating" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="88" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteObjects" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="98" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckForObjectExistence" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="106" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckForObjectExistenceWithDirectory" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="115" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldListKeysWithoutDirectory" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="126" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldListKeysWithDirectory" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="136" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetKeysWithoutDirectory" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="147" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetKeysWithDirectory" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="156" assertions="0" time="0.000008">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUploadWithGivenContentType" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="166" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="68" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="81" assertions="0" time="0.000008">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="93" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="108" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="119" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="130" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="150" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="165" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="185" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="198" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\AwsS3Test" classname="Gaufrette.Functional.Adapter.AwsS3Test" file="/workspace/tests/Gaufrette/Functional/Adapter/AwsS3Test.php" line="210" assertions="0" time="0.000008">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" tests="12" assertions="0" errors="0" warnings="0" failures="0" skipped="12" time="0.000157">
+      <testcase name="shouldGetContentType" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="44" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="68" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="81" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="93" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="108" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="119" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="130" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="150" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="165" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="185" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="198" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\AzureBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureBlobStorageTest.php" line="210" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" tests="14" assertions="0" errors="0" warnings="0" failures="0" skipped="14" time="0.000187">
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="42" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="58" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="72" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="91" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetSize" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="104" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMd5Hash" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="117" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetContentType" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="131" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="147" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="156" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="180" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="197" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="217" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="232" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\AzureMultiContainerBlobStorageTest" classname="Gaufrette.Functional.Adapter.AzureMultiContainerBlobStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/AzureMultiContainerBlobStorageTest.php" line="246" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" tests="12" assertions="0" errors="0" warnings="0" failures="0" skipped="12" time="0.000000">
+      <testcase name="shouldListKeys" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="64" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="68" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="81" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="93" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="108" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="119" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="130" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="150" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="165" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="185" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="198" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\DoctrineDbalTest" classname="Gaufrette.Functional.Adapter.DoctrineDbalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/DoctrineDbalTest.php" line="210" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" tests="11" assertions="0" errors="0" warnings="0" failures="0" skipped="11" time="0.000172">
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="68" assertions="0" time="0.000026">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="81" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="93" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="108" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="119" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="130" assertions="0" time="0.000021">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="150" assertions="0" time="0.000013">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="165" assertions="0" time="0.000013">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="185" assertions="0" time="0.000016">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="198" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\FtpTest" classname="Gaufrette.Functional.Adapter.FtpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/FtpTest.php" line="210" assertions="0" time="0.000022">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" tests="14" assertions="0" errors="0" warnings="0" failures="0" skipped="14" time="0.000422">
+      <testcase name="shouldThrowExceptionIfBucketMissing" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="23" assertions="0" time="0.000054">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndReadWithDirectory" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="38" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldSetMetadataCorrectly" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="60" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="68" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="81" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="93" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="108" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="119" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="130" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="150" assertions="0" time="0.000020">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="165" assertions="0" time="0.000184">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="185" assertions="0" time="0.000022">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="198" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\GoogleCloudStorageTest" classname="Gaufrette.Functional.Adapter.GoogleCloudStorageTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GoogleCloudStorageTest.php" line="210" assertions="0" time="0.000020">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" tests="15" assertions="0" errors="0" warnings="0" failures="0" skipped="15" time="0.000207">
+      <testcase name="shouldListKeys" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="33" assertions="0" time="0.000015">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRetrieveMetadataAfterWrite" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="84" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetSize" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="99" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRetrieveEmptyMetadata" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="109" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="120" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="68" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="81" assertions="0" time="0.000012">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="93" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="119" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="130" assertions="0" time="0.000020">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="150" assertions="0" time="0.000009">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="165" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="185" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="198" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\GridFSTest" classname="Gaufrette.Functional.Adapter.GridFSTest" file="/workspace/tests/Gaufrette/Functional/Adapter/GridFSTest.php" line="210" assertions="0" time="0.000018">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" tests="17" assertions="48" errors="0" warnings="0" failures="0" skipped="0" time="0.007477">
+      <testcase name="shouldWorkWithSyslink" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="42" assertions="1" time="0.001758"/>
+      <testcase name="shouldListingOnlyGivenDirectory" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="76" assertions="8" time="0.000627"/>
+      <testcase name="shouldListingAllKeys" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="100" assertions="3" time="0.000729"/>
+      <testcase name="shouldBeAbleToClearCache" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="117" assertions="3" time="0.000417"/>
+      <testcase name="shouldDeleteDirectory" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="144" assertions="3" time="0.000138"/>
+      <testcase name="shouldNotDeleteTheAdapterRootDirectory" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="160" assertions="2" time="0.000203"/>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="68" assertions="4" time="0.000394"/>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="81" assertions="1" time="0.000680"/>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="93" assertions="4" time="0.000251"/>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="108" assertions="1" time="0.000222"/>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="119" assertions="2" time="0.000202"/>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="130" assertions="4" time="0.000429"/>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="150" assertions="2" time="0.000187"/>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="165" assertions="5" time="0.000361"/>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="185" assertions="3" time="0.000197"/>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="198" assertions="1" time="0.000079"/>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\LocalTest" classname="Gaufrette.Functional.Adapter.LocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/LocalTest.php" line="210" assertions="1" time="0.000603"/>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" tests="11" assertions="0" errors="0" warnings="0" failures="0" skipped="11" time="0.000173">
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="68" assertions="0" time="0.000035">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="81" assertions="0" time="0.000015">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="93" assertions="0" time="0.000020">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="108" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="119" assertions="0" time="0.000014">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="130" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="150" assertions="0" time="0.000019">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="165" assertions="0" time="0.000011">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="185" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="198" assertions="0" time="0.000017">
+        <skipped/>
+      </testcase>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\PhpseclibSftpTest" classname="Gaufrette.Functional.Adapter.PhpseclibSftpTest" file="/workspace/tests/Gaufrette/Functional/Adapter/PhpseclibSftpTest.php" line="210" assertions="0" time="0.000010">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" tests="11" assertions="28" errors="0" warnings="0" failures="0" skipped="0" time="0.002378">
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="68" assertions="4" time="0.000379"/>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="81" assertions="1" time="0.000364"/>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="93" assertions="4" time="0.000166"/>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="108" assertions="1" time="0.000150"/>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="119" assertions="2" time="0.000097"/>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="130" assertions="4" time="0.000294"/>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="150" assertions="2" time="0.000139"/>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="165" assertions="5" time="0.000275"/>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="185" assertions="3" time="0.000134"/>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="198" assertions="1" time="0.000068"/>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\SafeLocalTest" classname="Gaufrette.Functional.Adapter.SafeLocalTest" file="/workspace/tests/Gaufrette/Functional/Adapter/SafeLocalTest.php" line="210" assertions="1" time="0.000312"/>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\Adapter\ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" tests="12" assertions="29" errors="0" warnings="0" failures="0" skipped="0" time="0.004175">
+      <testcase name="shouldNotAcceptInvalidZipArchive" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="34" assertions="1" time="0.000345"/>
+      <testcase name="shouldWriteAndRead" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="68" assertions="4" time="0.000970"/>
+      <testcase name="shouldUpdateFileContent" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="81" assertions="1" time="0.000689"/>
+      <testcase name="shouldCheckIfFileExists" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="93" assertions="4" time="0.000145"/>
+      <testcase name="shouldGetMtime" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="108" assertions="1" time="0.000102"/>
+      <testcase name="shouldFailWhenTryMtimeForKeyWhichDoesNotExist" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="119" assertions="2" time="0.000042"/>
+      <testcase name="shouldRenameFile" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="130" assertions="4" time="0.000579"/>
+      <testcase name="shouldDeleteFile" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="150" assertions="2" time="0.000122"/>
+      <testcase name="shouldFetchKeys" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="165" assertions="5" time="0.000813"/>
+      <testcase name="shouldWorkWithHiddenFiles" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="185" assertions="3" time="0.000148"/>
+      <testcase name="shouldKeepFileObjectInRegister" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="198" assertions="1" time="0.000022"/>
+      <testcase name="shouldWriteToSameFile" class="Gaufrette\Functional\Adapter\ZipTest" classname="Gaufrette.Functional.Adapter.ZipTest" file="/workspace/tests/Gaufrette/Functional/Adapter/ZipTest.php" line="210" assertions="1" time="0.000198"/>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\FileStream\InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" tests="18" assertions="31" errors="0" warnings="0" failures="0" skipped="0" time="0.001268">
+      <testcase name="shouldCheckIsFile" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="17" assertions="2" time="0.000709"/>
+      <testcase name="shouldCheckFileExists" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="29" assertions="2" time="0.000155"/>
+      <testcase name="shouldWriteAndReadFile" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="41" assertions="1" time="0.000045"/>
+      <testcase name="shouldNotReadWhenOpenInWriteMode" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="52" assertions="2" time="0.000031"/>
+      <testcase name="shouldNotWriteWhenOpenInReadMode" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="68" assertions="2" time="0.000026"/>
+      <testcase name="shouldWriteFromSettedPosition" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="84" assertions="2" time="0.000034"/>
+      <testcase name="shouldWriteEmptyContent" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="110" assertions="2" time="0.000025"/>
+      <testcase name="shouldSetAndGetPosition" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="123" assertions="4" time="0.000029"/>
+      <testcase name="shouldNotSeekWhenWhenceParameterIsInvalid" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="148" assertions="1" time="0.000019"/>
+      <testcase name="shouldHandlesSubDir" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="159" assertions="2" time="0.000026"/>
+      <testcase name="shouldUnlinkFile" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="172" assertions="1" time="0.000018"/>
+      <testcase name="shouldCopyFile" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="187" assertions="4" time="0.000040"/>
+      <testsuite name="Gaufrette\Functional\FileStream\InMemoryBufferTest::shouldCreateNewFile" tests="6" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.000111">
+        <testcase name="shouldCreateNewFile with data set #0" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000026"/>
+        <testcase name="shouldCreateNewFile with data set #1" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000023"/>
+        <testcase name="shouldCreateNewFile with data set #2" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000017"/>
+        <testcase name="shouldCreateNewFile with data set #3" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000016"/>
+        <testcase name="shouldCreateNewFile with data set #4" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000015"/>
+        <testcase name="shouldCreateNewFile with data set #5" class="Gaufrette\Functional\FileStream\InMemoryBufferTest" classname="Gaufrette.Functional.FileStream.InMemoryBufferTest" file="/workspace/tests/Gaufrette/Functional/FileStream/InMemoryBufferTest.php" line="204" assertions="1" time="0.000014"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Gaufrette\Functional\FileStream\LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" tests="20" assertions="34" errors="0" warnings="0" failures="0" skipped="0" time="0.005186">
+      <testcase name="shouldChmodDirectory" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="27" assertions="1" time="0.000513"/>
+      <testcase name="shouldSupportsDirectory" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="56" assertions="2" time="0.000335"/>
+      <testcase name="shouldCheckIsFile" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="17" assertions="2" time="0.000278"/>
+      <testcase name="shouldCheckFileExists" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="29" assertions="2" time="0.000249"/>
+      <testcase name="shouldWriteAndReadFile" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="41" assertions="1" time="0.000244"/>
+      <testcase name="shouldNotReadWhenOpenInWriteMode" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="52" assertions="2" time="0.000223"/>
+      <testcase name="shouldNotWriteWhenOpenInReadMode" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="68" assertions="2" time="0.000206"/>
+      <testcase name="shouldWriteFromSettedPosition" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="84" assertions="2" time="0.000355"/>
+      <testcase name="shouldWriteEmptyContent" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="110" assertions="2" time="0.000213"/>
+      <testcase name="shouldSetAndGetPosition" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="123" assertions="4" time="0.000261"/>
+      <testcase name="shouldNotSeekWhenWhenceParameterIsInvalid" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="148" assertions="1" time="0.000209"/>
+      <testcase name="shouldHandlesSubDir" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="159" assertions="2" time="0.000280"/>
+      <testcase name="shouldUnlinkFile" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="172" assertions="1" time="0.000249"/>
+      <testcase name="shouldCopyFile" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="187" assertions="4" time="0.000383"/>
+      <testsuite name="Gaufrette\Functional\FileStream\LocalTest::shouldCreateNewFile" tests="6" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.001188">
+        <testcase name="shouldCreateNewFile with data set #0" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000212"/>
+        <testcase name="shouldCreateNewFile with data set #1" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000199"/>
+        <testcase name="shouldCreateNewFile with data set #2" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000226"/>
+        <testcase name="shouldCreateNewFile with data set #3" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000207"/>
+        <testcase name="shouldCreateNewFile with data set #4" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000180"/>
+        <testcase name="shouldCreateNewFile with data set #5" class="Gaufrette\Functional\FileStream\LocalTest" classname="Gaufrette.Functional.FileStream.LocalTest" file="/workspace/tests/Gaufrette/Functional/FileStream/LocalTest.php" line="204" assertions="1" time="0.000164"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
